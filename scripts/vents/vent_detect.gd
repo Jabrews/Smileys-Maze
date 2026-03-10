@@ -1,6 +1,7 @@
 extends Node
 
 @export var ray : RayCast3D
+@export var player : CharacterBody3D
 
 func _process(delta: float) -> void:
 	
@@ -13,6 +14,15 @@ func _process(delta: float) -> void:
 			
 			# and presses interact
 			if Input.is_action_just_pressed("interact")	 :
+				
+				#for mini map
+				var new_floor = collider.vent_floor
+				if collider.vent_downward:
+					new_floor -= 1
+				else:
+					new_floor += 1
+				GlSignalBus.emit_signal("icon_changed_floor", player.name, 'PLAYER', player.global_position,  new_floor)
+				
 				# activate vent_loading
 				GlSignalBus.emit_signal('vent_loop_init', collider.vent_downward)
 				GlSignalBus.emit_signal('vent_floor_travel', collider.vent_floor, collider.vent_downward)

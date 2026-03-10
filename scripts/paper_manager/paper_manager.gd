@@ -132,13 +132,16 @@ func pop_random_spot(spots: Array[Vector3]) -> Vector3:
 func create_papers_for_floor(paperOnePos: Vector3, paperTwoPos: Vector3, paperDudPos: Vector3) -> void:
 	var paperOne = paper_scene.instantiate()
 	add_child(paperOne)
+	paperOne.name = "Paper"
 	paperOne.global_position = paperOnePos
 
 	var paperTwo = paper_scene.instantiate()
 	add_child(paperTwo)
+	paperTwo.name = 'Paper'
 	paperTwo.global_position = paperTwoPos
 
 	var paperDud = paper_scene.instantiate()
 	add_child(paperDud)
+	paperDud.name = 'Paper'
 	paperDud.global_position = paperDudPos
 	paperDud.is_dud = true

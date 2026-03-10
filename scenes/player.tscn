@@ -45,8 +45,9 @@ ray = NodePath("..")
 transform = Transform3D(3.6, 0, 0, 0, -1.57361e-07, -3.473, 0, 3.6, -1.5180966e-07, 0, 0, -0.32564843)
 collision_mask = 64
 
-[node name="VentDetect" parent="CameraPivot/Camera3D/VentRay" unique_id=543325597 node_paths=PackedStringArray("ray") instance=ExtResource("3_qhqgy")]
+[node name="VentDetect" parent="CameraPivot/Camera3D/VentRay" unique_id=543325597 node_paths=PackedStringArray("ray", "player") instance=ExtResource("3_qhqgy")]
 ray = NodePath("..")
+player = NodePath("../../../..")
 
 [node name="FlashLightPivot" type="Node3D" parent="CameraPivot" unique_id=1834482696]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7658684, -0.6153021)
@@ -74,3 +75,9 @@ spot_angle = 30.0
 script = ExtResource("4_dqkch")
 player = NodePath("..")
 camera = NodePath("../CameraPivot/Camera3D")
+
+[node name="MiniMapUpdateTimer" type="Timer" parent="." unique_id=1463990172]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="MiniMapUpdateTimer" to="." method="_on_mini_map_update_timer_timeout"]

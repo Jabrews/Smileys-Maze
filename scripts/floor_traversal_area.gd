@@ -1,0 +1,19 @@
+extends Area3D 
+
+@export var enter_floor_num = 0
+
+
+
+
+func _ready() -> void:
+	body_entered.connect(_on_floor_area_body_entered)
+	
+func _on_floor_area_body_entered(body : Node3D) :
+	if body.is_in_group('player') :
+		
+		# light area controller
+		GlSignalBus.emit_signal("light_area_travel", enter_floor_num)
+		# mini map
+		GlSignalBus.emit_signal("icon_changed_floor", body.name, 'PLAYER', body.global_position, enter_floor_num)
+	elif body.is_in_group('smiley') :
+		GlSignalBus.emit_signal("icon_changed_floor", body.name, 'SMILEY', body.global_position, enter_floor_num)

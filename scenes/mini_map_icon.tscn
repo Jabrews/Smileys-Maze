@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://uqrs5qmp3wxy"]
+
+[ext_resource type="Script" uid="uid://8qxim4ncg8cm" path="res://scripts/UI/mini_map/mini_map_icon.gd" id="1_jexnh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctpus"]
+
+[sub_resource type="Curve" id="Curve_jexnh"]
+_data = [Vector2(0.02645503, 0.55056185), 0.0, 0.0, 0, 0, Vector2(0.51322746, 0.23595512), 0.0, 0.0, 0, 0, Vector2(1, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_jexnh"]
+colors = PackedColorArray(0, 0.45543283, 0.6827864, 1, 1, 1, 1, 1)
+
+[node name="MiniMapIcon" type="Sprite2D" unique_id=1730821822]
+material = SubResource("ShaderMaterial_ctpus")
+script = ExtResource("1_jexnh")
+
+[node name="PaperCollectParticle" type="CPUParticles2D" parent="." unique_id=1898425152]
+emitting = false
+amount = 20
+lifetime = 0.42
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 6.21
+gravity = Vector2(0, 0)
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_jexnh")
+color = Color(0.69803923, 0.93333334, 0.28627452, 1)
+color_ramp = SubResource("Gradient_jexnh")

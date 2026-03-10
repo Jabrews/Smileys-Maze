@@ -19,6 +19,9 @@ var ROTATE_SPEED = 5.0
 
 func _ready() -> void:
 	scale = Vector3(0.4, 0.4, 0.4)
+	
+	await get_tree().process_frame
+	GlSignalBus.emit_signal("map_icon_object_init", 'PAPER', global_position, name)
 
 
 func _process(delta: float) -> void:
@@ -27,6 +30,8 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group('player') :
+		
+		GlSignalBus.emit_signal('map_icon_delete', name, global_position)
 		
 		# disable collision
 		set_deferred("monitoring", false)

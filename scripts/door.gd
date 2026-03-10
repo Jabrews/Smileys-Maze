@@ -70,7 +70,13 @@ func _on_door_open_delay_timeout() -> void:
 func _on_open_door_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		playerInRadius = true
+	if body.is_in_group('smiley') :
+		GlSignalBus.emit_signal('toggle_smiley_in_door_radius', true)
+		
 
 func _on_open_door_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		playerInRadius = false
+	if body.is_in_group('smiley') :
+		GlSignalBus.emit_signal('toggle_smiley_in_door_radius', false)
+	

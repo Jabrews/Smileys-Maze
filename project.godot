@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MazeGame"
-run/main_scene="uid://d0psyk5yhw3bf"
+run/main_scene="uid://d4nfa7popwrnw"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -39,6 +39,7 @@ player=""
 lights=""
 hoverable=""
 vents=""
+smiley=""
 
 [input]
 
@@ -82,6 +83,7 @@ run={
 3d_physics/layer_5="lights"
 3d_physics/layer_6="hoverable"
 3d_physics/layer_7="vents"
+3d_physics/layer_8="smiley"
 
 [physics]
 

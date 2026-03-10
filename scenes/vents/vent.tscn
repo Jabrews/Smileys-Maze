@@ -45,7 +45,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_34hm1")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qcowo"]
-size = Vector3(0.1630249, 1.1658497, 1.8510132)
+size = Vector3(0.1630249, 1.7333984, 1.8510132)
 
 [node name="Vent" type="StaticBody3D" unique_id=1286842283 groups=["vents"]]
 collision_layer = 64
@@ -57,7 +57,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1.5, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = SubResource("ArrayMesh_42pey")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=808891670]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5440283, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82780266, 0)
 shape = SubResource("BoxShape3D_qcowo")
 
 [node name="hoverable_mesh" parent="." unique_id=2031760550 node_paths=PackedStringArray("orignal_mesh", "original_coll_shape") instance=ExtResource("2_hhoh0")]

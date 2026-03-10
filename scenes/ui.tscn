@@ -7,6 +7,25 @@
 [ext_resource type="Script" uid="uid://d25j5diox2lwu" path="res://scripts/UI/paper_count.gd" id="5_p7vwb"]
 [ext_resource type="Texture2D" uid="uid://ccxbkpfw5us41" path="res://models/UI/paper_count/paper_ui.png" id="5_wm3ai"]
 [ext_resource type="FontFile" uid="uid://dx3p381dbs6w5" path="res://models/UI/munro-narrow.ttf" id="6_8dubc"]
+[ext_resource type="Script" uid="uid://d1vm6v68gwby5" path="res://scripts/UI/mini_map/active_map_controller.gd" id="8_7dvkv"]
+[ext_resource type="Script" uid="uid://cf2qxhmrejlyi" path="res://scripts/UI/mini_map/alert_overlay.gd" id="8_gglip"]
+[ext_resource type="Texture2D" uid="uid://dr5s8m2lkcphw" path="res://models/UI/mini_map/floors/map_one_light.png" id="8_ktti3"]
+[ext_resource type="Script" uid="uid://bhyacgcomlbyy" path="res://scripts/UI/mini_map/mini_map_pos_math.gd" id="9_cof4p"]
+[ext_resource type="Script" uid="uid://cdcgdmmimsgjr" path="res://scripts/UI/mini_map/icon_creation_manager.gd" id="9_vdcm2"]
+[ext_resource type="Script" uid="uid://b2pi30hrqo788" path="res://scripts/UI/mini_map/icon_deletion_manager.gd" id="10_h1mc3"]
+[ext_resource type="Texture2D" uid="uid://ddtkvg7fh3qpm" path="res://models/UI/mini_map/mini_map_noise.png" id="10_qsv74"]
+[ext_resource type="Texture2D" uid="uid://bpte4bxo0mxit" path="res://models/UI/mini_map/floors/map_two_light.png" id="11_6rmj2"]
+[ext_resource type="Script" uid="uid://b7awxy8foo7te" path="res://scripts/UI/mini_map/icon_moving_manager.gd" id="11_h1mc3"]
+[ext_resource type="Texture2D" uid="uid://mu8rihkujec1" path="res://models/UI/mini_map/floors/map_three_light.png" id="12_vsj0x"]
+[ext_resource type="Script" uid="uid://083drley1p3x" path="res://scripts/UI/mini_map/fog_of_war_manager.gd" id="13_jkdwc"]
+[ext_resource type="Shader" uid="uid://by26xddho1qqh" path="res://scripts/shaders/minimap_dark.gdshader" id="14_ycmcx"]
+[ext_resource type="Texture2D" uid="uid://d0wbdm2inkh6l" path="res://models/UI/mini_map/floors/map_one_dark.png" id="15_f7tlh"]
+[ext_resource type="Texture2D" uid="uid://st65nan3m4j8" path="res://models/UI/mini_map/noisy-texture-110x70-o89-d39-c-000000-t0.png" id="16_41akx"]
+[ext_resource type="Shader" uid="uid://bwghu50ofrc2p" path="res://scripts/shaders/minimap_light.gdshader.gdshader" id="16_kupmu"]
+[ext_resource type="Texture2D" uid="uid://ddr43wkht2m3i" path="res://models/UI/mini_map/map_circle.png" id="18_sesyt"]
+[ext_resource type="Texture2D" uid="uid://cbvwdpkhjf0wb" path="res://models/UI/mini_map/floors/map_two_dark.png" id="19_kupmu"]
+[ext_resource type="Shader" uid="uid://eof2pgcid7uu" path="res://scripts/shaders/map_background.gdshader" id="20_sesyt"]
+[ext_resource type="Texture2D" uid="uid://dhdin1exxndye" path="res://models/UI/mini_map/floors/map_three_dark.png" id="22_catpy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p7vwb"]
 font = ExtResource("6_8dubc")
@@ -17,6 +36,72 @@ font_color = Color(0.3044419, 0.9695342, 0.07516525, 1)
 font = ExtResource("6_8dubc")
 font_size = 10
 font_color = Color(0.2683017, 0.8649032, 0.06391092, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k7j3"]
+shader = ExtResource("14_ycmcx")
+shader_parameter/noise_texture = ExtResource("10_qsv74")
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/noise_uv_scale = Vector2(1, 1)
+shader_parameter/mask_texture = ExtResource("18_sesyt")
+shader_parameter/player_uv = Vector2(0.5, 0.5)
+shader_parameter/mask_size_uv = Vector2(3, 3)
+shader_parameter/mask_threshold = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkdwc"]
+shader = ExtResource("16_kupmu")
+shader_parameter/noise_texture = ExtResource("10_qsv74")
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/noise_uv_scale = Vector2(1, 1)
+shader_parameter/mask_texture = ExtResource("18_sesyt")
+shader_parameter/player_uv = Vector2(0.5, 0.5)
+shader_parameter/mask_size_uv = Vector2(3, 3)
+shader_parameter/mask_threshold = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_catpy"]
+shader = ExtResource("20_sesyt")
+shader_parameter/pixel_grid = 200.0
+shader_parameter/particle_size = 0.05
+shader_parameter/growth_speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_41akx"]
+shader = ExtResource("14_ycmcx")
+shader_parameter/noise_texture = ExtResource("10_qsv74")
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/noise_uv_scale = Vector2(1, 1)
+shader_parameter/mask_texture = ExtResource("18_sesyt")
+shader_parameter/player_uv = Vector2(0.5, 0.5)
+shader_parameter/mask_size_uv = Vector2(3, 3)
+shader_parameter/mask_threshold = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlppe"]
+shader = ExtResource("16_kupmu")
+shader_parameter/noise_texture = ExtResource("10_qsv74")
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/noise_uv_scale = Vector2(1, 1)
+shader_parameter/mask_texture = ExtResource("18_sesyt")
+shader_parameter/player_uv = Vector2(0.5, 0.5)
+shader_parameter/mask_size_uv = Vector2(3, 3)
+shader_parameter/mask_threshold = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycmcx"]
+shader = ExtResource("14_ycmcx")
+shader_parameter/noise_texture = ExtResource("10_qsv74")
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/noise_uv_scale = Vector2(1, 1)
+shader_parameter/mask_texture = ExtResource("18_sesyt")
+shader_parameter/player_uv = Vector2(0.5, 0.5)
+shader_parameter/mask_size_uv = Vector2(3, 3)
+shader_parameter/mask_threshold = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kupmu"]
+shader = ExtResource("16_kupmu")
+shader_parameter/noise_texture = ExtResource("10_qsv74")
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/noise_uv_scale = Vector2(1, 1)
+shader_parameter/mask_texture = ExtResource("18_sesyt")
+shader_parameter/player_uv = Vector2(0.5, 0.5)
+shader_parameter/mask_size_uv = Vector2(3, 3)
+shader_parameter/mask_threshold = 0.5
 
 [node name="UI" type="Control" unique_id=653024877]
 layout_mode = 3
@@ -86,5 +171,157 @@ offset_bottom = 20.0
 text = "6"
 label_settings = SubResource("LabelSettings_cgfq5")
 
+[node name="MiniMapLayer" type="CanvasLayer" parent="." unique_id=522307078]
+
+[node name="MiniMapAlertModulate" type="CanvasModulate" parent="MiniMapLayer" unique_id=1804761218 node_paths=PackedStringArray("mini_map_controller", "alert_lock_timer")]
+position = Vector2(1, 140)
+script = ExtResource("8_gglip")
+mini_map_controller = NodePath("../MiniMapController")
+alert_lock_timer = NodePath("AlertLockTimer")
+
+[node name="AlertLockTimer" type="Timer" parent="MiniMapLayer/MiniMapAlertModulate" unique_id=1406262322]
+wait_time = 10.0
+one_shot = true
+
+[node name="MiniMapController" type="Control" parent="MiniMapLayer" unique_id=1079399792]
+layout_mode = 3
+anchor_left = 0.003125
+anchor_top = 0.5833333
+anchor_right = 0.390625
+anchor_bottom = 0.9916667
+
+[node name="ActiveMapController" type="Node" parent="MiniMapLayer/MiniMapController" unique_id=388466472]
+script = ExtResource("8_7dvkv")
+
+[node name="MiniMapPosMath" type="Node" parent="MiniMapLayer/MiniMapController" unique_id=1747400209 node_paths=PackedStringArray("map_one_node", "map_two_node", "map_three_node")]
+script = ExtResource("9_cof4p")
+map_one_node = NodePath("../MapFloorOne")
+map_two_node = NodePath("../MapFloorTwo")
+map_three_node = NodePath("../MapFloorThree")
+
+[node name="IconCreationManager" type="Node" parent="MiniMapLayer/MiniMapController" unique_id=44176698 node_paths=PackedStringArray("mini_map_math_helper")]
+script = ExtResource("9_vdcm2")
+mini_map_math_helper = NodePath("../MiniMapPosMath")
+
+[node name="IconDeletionManager" type="Node" parent="MiniMapLayer/MiniMapController" unique_id=1969185769 node_paths=PackedStringArray("mini_map_math_helper")]
+script = ExtResource("10_h1mc3")
+mini_map_math_helper = NodePath("../MiniMapPosMath")
+
+[node name="IconMovingManager" type="Node" parent="MiniMapLayer/MiniMapController" unique_id=227839615 node_paths=PackedStringArray("mini_map_math_helper", "fog_of_war_manager")]
+script = ExtResource("11_h1mc3")
+mini_map_math_helper = NodePath("../MiniMapPosMath")
+fog_of_war_manager = NodePath("../FogOfWarManager")
+
+[node name="FogOfWarManager" type="Node" parent="MiniMapLayer/MiniMapController" unique_id=832298184 node_paths=PackedStringArray("mini_map_math_helper")]
+script = ExtResource("13_jkdwc")
+mini_map_math_helper = NodePath("../MiniMapPosMath")
+
+[node name="MapFloorOne" type="Control" parent="MiniMapLayer/MiniMapController" unique_id=2085420128]
+layout_mode = 1
+anchor_left = 0.056
+anchor_top = 0.27600002
+anchor_right = 0.94400007
+anchor_bottom = 0.99000007
+offset_left = 0.055999756
+offset_top = -0.048002243
+offset_right = -0.056007385
+offset_bottom = -0.020004272
+
+[node name="MapDark" type="Sprite2D" parent="MiniMapLayer/MiniMapController/MapFloorOne" unique_id=664708250]
+modulate = Color(0.9004175, 0.80598444, 0.5833873, 1)
+material = SubResource("ShaderMaterial_8k7j3")
+position = Vector2(55, 35)
+texture = ExtResource("15_f7tlh")
+
+[node name="MapLight" type="Sprite2D" parent="MiniMapLayer/MiniMapController/MapFloorOne" unique_id=2007527182]
+modulate = Color(0.9004175, 0.80598444, 0.5833873, 1)
+material = SubResource("ShaderMaterial_jkdwc")
+position = Vector2(55, 35)
+texture = ExtResource("8_ktti3")
+
+[node name="TextureRect" type="TextureRect" parent="MiniMapLayer/MiniMapController/MapFloorOne" unique_id=1570850275]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_catpy")
+layout_mode = 0
+offset_left = 8.0
+offset_right = 118.0
+offset_bottom = 70.0
+scale = Vector2(0.9869876, 1.1369888)
+texture = ExtResource("16_41akx")
+flip_v = true
+
+[node name="MapFloorTwo" type="Control" parent="MiniMapLayer/MiniMapController" unique_id=42885762]
+visible = false
+layout_mode = 1
+anchor_left = 0.056
+anchor_top = 0.27600002
+anchor_right = 0.94400007
+anchor_bottom = 0.99000007
+offset_left = 0.055999756
+offset_top = -0.048002243
+offset_right = -0.056007385
+offset_bottom = -0.020004272
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MapDark" type="Sprite2D" parent="MiniMapLayer/MiniMapController/MapFloorTwo" unique_id=1191831262]
+modulate = Color(0.9004175, 0.80598444, 0.5833873, 1)
+material = SubResource("ShaderMaterial_41akx")
+position = Vector2(55, 35)
+texture = ExtResource("19_kupmu")
+
+[node name="MapLight" type="Sprite2D" parent="MiniMapLayer/MiniMapController/MapFloorTwo" unique_id=1589426618]
+modulate = Color(0.9004175, 0.80598444, 0.5833873, 1)
+material = SubResource("ShaderMaterial_rlppe")
+position = Vector2(55, 35)
+texture = ExtResource("11_6rmj2")
+
+[node name="TextureRect" type="TextureRect" parent="MiniMapLayer/MiniMapController/MapFloorTwo" unique_id=1601759465]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_catpy")
+layout_mode = 0
+offset_left = 8.0
+offset_right = 118.0
+offset_bottom = 70.0
+texture = ExtResource("16_41akx")
+flip_v = true
+
+[node name="MapFloorThree" type="Control" parent="MiniMapLayer/MiniMapController" unique_id=38216696]
+visible = false
+layout_mode = 1
+anchor_left = 0.056
+anchor_top = 0.27600002
+anchor_right = 0.94400007
+anchor_bottom = 0.99000007
+offset_left = 0.055999756
+offset_top = -0.048002243
+offset_right = -0.056007385
+offset_bottom = -0.020004272
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MapDark" type="Sprite2D" parent="MiniMapLayer/MiniMapController/MapFloorThree" unique_id=1441891035]
+modulate = Color(0.9004175, 0.80598444, 0.5833873, 1)
+material = SubResource("ShaderMaterial_ycmcx")
+position = Vector2(55, 35)
+texture = ExtResource("22_catpy")
+
+[node name="MapLight" type="Sprite2D" parent="MiniMapLayer/MiniMapController/MapFloorThree" unique_id=582713404]
+modulate = Color(0.9004175, 0.80598444, 0.5833873, 1)
+material = SubResource("ShaderMaterial_kupmu")
+position = Vector2(55, 35)
+texture = ExtResource("12_vsj0x")
+
+[node name="TextureRect" type="TextureRect" parent="MiniMapLayer/MiniMapController/MapFloorThree" unique_id=1252831168]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_catpy")
+layout_mode = 0
+offset_left = 8.0
+offset_right = 118.0
+offset_bottom = 70.0
+texture = ExtResource("16_41akx")
+flip_v = true
+
 [connection signal="timeout" from="StaminaBar/RunIncrementDown" to="StaminaBar" method="_on_run_increment_down_timeout"]
 [connection signal="timeout" from="StaminaBar/RunIncrementUp" to="StaminaBar" method="_on_run_increment_up_timeout"]
+[connection signal="timeout" from="MiniMapLayer/MiniMapAlertModulate/AlertLockTimer" to="MiniMapLayer/MiniMapAlertModulate" method="_on_alert_lock_timer_timeout"]

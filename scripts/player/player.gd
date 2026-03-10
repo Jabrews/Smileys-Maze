@@ -24,6 +24,9 @@ var current_state := MoveState.IDLE
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	GlSignalBus.connect("stamina_bar_depleted_status", _handle_stamina_bar_depleted_status)
+	
+	await get_tree().process_frame
+	GlSignalBus.emit_signal('map_icon_object_init','PLAYER', global_position, name)
 
 
 func _physics_process(delta: float) -> void:
@@ -137,3 +140,9 @@ func sound_emit_signals(type):
 		GlSoundManager.emit_signal("player_stopped_running")
 	if type == "stopped_walking":
 		GlSoundManager.emit_signal("player_stopped_walking")
+
+
+## For updating mini map icon
+func _on_mini_map_update_timer_timeout() -> void:
+	# for mini map
+	GlSignalBus.emit_signal('icon_moved', name, 'PLAYER', global_position)

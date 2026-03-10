@@ -13,3 +13,7 @@ signal player_stopped_running
 ## door
 signal door_opened
 signal door_closed
+
+## mini map
+signal smiley_alert()
+signal paper_alert()
