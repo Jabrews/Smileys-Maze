@@ -1,4 +1,5 @@
 extends Node
+@warning_ignore("unused_signal")
 
 ## player 
 # find in sound areas : stairway entrance

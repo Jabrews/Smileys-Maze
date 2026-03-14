@@ -4,12 +4,14 @@
 [ext_resource type="Script" uid="uid://clm0r52h88sm5" path="res://scripts/door.gd" id="1_uvdjg"]
 [ext_resource type="PackedScene" uid="uid://ba4vanb8utsvy" path="res://reusable/hover_mesh_system/hoverable/hoverable_mesh.tscn" id="3_83dcw"]
 [ext_resource type="PackedScene" uid="uid://btyj6kkkd5dfh" path="res://scenes/hover_meshes/door_mesh.tscn" id="4_la1wf"]
+[ext_resource type="AudioStream" uid="uid://de4tlyuivhkon" path="res://sounds/door_open.mp3" id="5_q5w8r"]
+[ext_resource type="AudioStream" uid="uid://dd3vli071tc0r" path="res://sounds/door_close.mp3" id="6_t58dd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_18pbm"]
 size = Vector3(0.36206055, 4.9833374, 3.9458008)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_83dcw"]
-size = Vector3(7.1628304, 4.455017, 3.4703674)
+size = Vector3(5.045988, 4.455017, 4.3978043)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_la1wf"]
 albedo_texture = ExtResource("1_hpvv5")
@@ -55,6 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3700237, -1.829261)
 [node name="DoorStaticBody" type="StaticBody3D" parent="DoorPivot" unique_id=1397539035]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8527265)
 collision_layer = 2
+collision_mask = 129
 
 [node name="CollShape" type="CollisionShape3D" parent="DoorPivot/DoorStaticBody" unique_id=1666744605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3994308, -1.8457947)
@@ -66,9 +69,10 @@ one_shot = true
 
 [node name="OpenDoorArea" type="Area3D" parent="." unique_id=413534280]
 collision_layer = 0
+collision_mask = 129
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenDoorArea" unique_id=129768473]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4206605, 0, 0)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="OpenDoorArea" unique_id=926569127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1883361, 0, 0.4637184)
 shape = SubResource("BoxShape3D_83dcw")
 
 [node name="DoorMesh" type="MeshInstance3D" parent="." unique_id=793656431]
@@ -81,6 +85,39 @@ orignal_mesh = NodePath("../DoorMesh")
 movement_possible = true
 original_coll_shape = NodePath("../DoorPivot/DoorStaticBody/CollShape")
 
+[node name="NavigationObstacleRight" type="NavigationObstacle3D" parent="." unique_id=718488900 groups=["nav-gridmaps"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.494226, 0)
+height = 4.6
+vertices = PackedVector3Array(-2.1428518, 0, 1.7472677, -2.0271385, 0, 4.1033688, 3.0714011, 0, 4.201417, 2.9058752, 0, 1.938407)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacleLeft" type="NavigationObstacle3D" parent="." unique_id=1584462383 groups=["nav-gridmaps"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.494226, 0)
+height = 4.6
+vertices = PackedVector3Array(-2.094658, 0, -1.7456753, -2.0250387, 0, -4.012883, 2.8008103, 0, -3.839144, 2.7165685, 0, -1.8541541)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="DoorCollDelay" type="Timer" parent="." unique_id=747458879]
+one_shot = true
+
+[node name="AutoSmileyCloseDoorTimer" type="Timer" parent="." unique_id=1740587576]
+wait_time = 8.0
+one_shot = true
+
+[node name="DoorOpen" type="AudioStreamPlayer3D" parent="." unique_id=549536221]
+stream = ExtResource("5_q5w8r")
+volume_db = -20.0
+pitch_scale = 0.5
+
+[node name="DoorClose" type="AudioStreamPlayer3D" parent="." unique_id=2137239415]
+stream = ExtResource("6_t58dd")
+volume_db = -20.0
+pitch_scale = 0.5
+
 [connection signal="timeout" from="DoorOpenDelay" to="." method="_on_door_open_delay_timeout"]
 [connection signal="body_entered" from="OpenDoorArea" to="." method="_on_open_door_area_body_entered"]
 [connection signal="body_exited" from="OpenDoorArea" to="." method="_on_open_door_area_body_exited"]
+[connection signal="timeout" from="DoorCollDelay" to="." method="_on_door_coll_delay_timeout"]
+[connection signal="timeout" from="AutoSmileyCloseDoorTimer" to="." method="_on_auto_smiley_close_door_timer_timeout"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MazeGame"
-run/main_scene="uid://d4nfa7popwrnw"
+run/main_scene="uid://d0psyk5yhw3bf"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,7 +20,10 @@ config/icon="res://icon.svg"
 GlLightingManager="*uid://cd28vca7h2w1j"
 GlSoundManager="*uid://bnan0d1okuen0"
 GlSignalBus="*uid://cycug5gv4aqds"
-Dither3DGlobals="*uid://cdfmq2vdpwd5d"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [display]
 
@@ -40,6 +43,7 @@ lights=""
 hoverable=""
 vents=""
 smiley=""
+nav-gridmaps=""
 
 [input]
 
@@ -84,6 +88,11 @@ run={
 3d_physics/layer_6="hoverable"
 3d_physics/layer_7="vents"
 3d_physics/layer_8="smiley"
+
+[navigation]
+
+3d/warnings/navmesh_edge_merge_errors=false
+3d/warnings/navmesh_cell_size_mismatch=false
 
 [physics]
 

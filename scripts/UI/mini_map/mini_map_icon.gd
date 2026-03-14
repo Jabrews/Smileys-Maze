@@ -79,11 +79,11 @@ func handle_player_move_smiley(player_glob_pos) :
 	
 	var in_range = dist < 13.0
 
-	if in_range and not icon_sound_signal_sent:
+	if in_range and not icon_sound_signal_sent and get_parent().visible == true :
 		GlSignalBus.emit_signal("smiley_appeared")
 		icon_sound_signal_sent = true
 
-	elif not in_range and icon_sound_signal_sent:
+	elif not in_range and icon_sound_signal_sent and get_parent().visible == true:
 		GlSignalBus.emit_signal("smiley_dissapeard")
 		icon_sound_signal_sent = false
 	
@@ -97,14 +97,16 @@ func handle_player_move_paper(player_glob_pos) :
 	
 	var fade = clamp(1.0 - (dist / reveal_radius), 0.0, 250.0)
 	
-	var in_range = dist < 13.0
+	var in_range = dist < 10.0
 
 	if in_range and not icon_sound_signal_sent:
 		GlSoundManager.emit_signal('paper_alert')
+		GlSignalBus.emit_signal('player_near_paper')
 		icon_sound_signal_sent = true
 
 	elif not in_range and icon_sound_signal_sent:
 		icon_sound_signal_sent = false
+		GlSignalBus.emit_signal('player_not_near_paper')
 	
 	modulate.a = fade
 	

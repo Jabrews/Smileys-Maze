@@ -52,7 +52,7 @@ func decide_parent_from_height(icon_pos_y) :
 		return map_two_node
 	elif icon_pos_y > 32 :
 		return map_three_node
-
+	
 # helper to get all floor nodes 
 func get_map_nodes() :
 	return [map_one_node, map_two_node, map_three_node]

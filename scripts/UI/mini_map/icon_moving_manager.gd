@@ -12,7 +12,7 @@ func _ready() -> void:
 	GlSignalBus.connect("icon_moved", _handle_icon_moved)
 	GlSignalBus.connect('icon_changed_floor', _handle_icon_changed_floor)
 
-func _handle_icon_changed_floor(icon_name, icon_type, icon_pos, new_floor : int):
+func _handle_icon_changed_floor(icon_name, _icon_type, icon_pos, new_floor : int):
 
 	var map_nodes = mini_map_math_helper.get_map_nodes()
 	var new_map_parent = mini_map_math_helper.get_map_node_from_floor_num(new_floor)
@@ -44,5 +44,3 @@ func _handle_icon_moved(icon_name, icon_type, icon_pos : Vector3) :
 			fog_of_war_manager._handle_player_moved_shader_update(icon_shader_uv_pos)
 			# mini map icon 
 			GlSignalBus.emit_signal('player_moved', icon.position)
-				
-	

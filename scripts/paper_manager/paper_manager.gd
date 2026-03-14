@@ -51,12 +51,12 @@ func _ready() -> void:
 	randomize()
 
 	# spawn papers for each floor using the same algorithm
-	spawn_floor_papers(FLOOR_ONE_SPOTS)
-	spawn_floor_papers(FLOOR_TWO_SPOTS)
-	spawn_floor_papers(FLOOR_THREE_SPOTS)
+	spawn_floor_papers(FLOOR_ONE_SPOTS, 1)
+	spawn_floor_papers(FLOOR_TWO_SPOTS, 2)
+	spawn_floor_papers(FLOOR_THREE_SPOTS, 3)
 
 ## spawns 3 papers: paper1, paper2 (far from paper1), and a dud (any remaining spot)
-func spawn_floor_papers(base_spots: Array[Vector3]) -> void:
+func spawn_floor_papers(base_spots: Array[Vector3] ,floor_num : int) -> void:
 	# copy so we can remove spots without affecting your originals
 	var spots: Array[Vector3] = base_spots.duplicate()
 
@@ -70,7 +70,7 @@ func spawn_floor_papers(base_spots: Array[Vector3]) -> void:
 	if spots.size() > 0:
 		dud = pop_random_spot(spots)
 
-	create_papers_for_floor(paper1, paper2, dud)
+	create_papers_for_floor(paper1, paper2, dud, floor_num)
 
 ## picks (spot1, spot2) where spot2 is at least min_dist away from spot1
 ## if a chosen spot1 has no valid far spot2, it "restarts" by putting spot1 back and trying a new spot1
@@ -129,19 +129,26 @@ func pop_random_spot(spots: Array[Vector3]) -> Vector3:
 	return chosen
 
 ## spawns 3 paper scenes and positions them (paper_dud gets is_dud = true)
-func create_papers_for_floor(paperOnePos: Vector3, paperTwoPos: Vector3, paperDudPos: Vector3) -> void:
+func create_papers_for_floor(paperOnePos: Vector3, paperTwoPos: Vector3, paperDudPos: Vector3, floor_num : int) -> void:
 	var paperOne = paper_scene.instantiate()
 	add_child(paperOne)
 	paperOne.name = "Paper"
 	paperOne.global_position = paperOnePos
+	
+	# for getting paper_pos to smiley move manager
+	GlSignalBus.emit_signal('paper_object_created', paperOne.name, paperOne.global_position, floor_num)
 
 	var paperTwo = paper_scene.instantiate()
 	add_child(paperTwo)
 	paperTwo.name = 'Paper'
 	paperTwo.global_position = paperTwoPos
+	
+	GlSignalBus.emit_signal('paper_object_created', paperTwo.name, paperTwo.global_position, floor_num)
 
 	var paperDud = paper_scene.instantiate()
 	add_child(paperDud)
 	paperDud.name = 'Paper'
 	paperDud.global_position = paperDudPos
 	paperDud.is_dud = true
+	
+	GlSignalBus.emit_signal('paper_object_created', paperDud.name, paperDud.global_position, floor_num)

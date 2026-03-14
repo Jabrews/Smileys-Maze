@@ -24,7 +24,7 @@ func _ready() -> void:
 	hoverable_coll_shape.shape = original_coll_shape.shape.duplicate()
 	hoverable_coll_shape.global_transform = original_coll_shape.global_transform
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	## kinda hacky but works for moving objects
 	if movement_possible:

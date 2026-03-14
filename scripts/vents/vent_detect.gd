@@ -3,7 +3,7 @@ extends Node
 @export var ray : RayCast3D
 @export var player : CharacterBody3D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	# see if poking vent,
 	if ray.is_colliding():

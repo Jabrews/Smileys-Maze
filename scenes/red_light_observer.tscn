@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c7bf5lea78w71"]
 
-[ext_resource type="Script" uid="uid://cvp5unqckgay2" path="res://scripts/red_light_observer.gd" id="1_wrauj"]
+[ext_resource type="Script" uid="uid://cvp5unqckgay2" path="res://scripts/smiley/red_light_observer.gd" id="1_wrauj"]
 [ext_resource type="AudioStream" uid="uid://cwhog8rdctwfx" path="res://sounds/light_blink_red.mp3" id="2_sopvs"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g2els"]
-radius = 5.6621284
+radius = 4.0
 
 [node name="RedLightObserver" type="Area3D" unique_id=1746474822]
 collision_layer = 0
@@ -17,7 +17,7 @@ debug_color = Color(0.7254902, 0.25882354, 0.98039216, 0.6627451)
 
 [node name="LightBleepRed" type="AudioStreamPlayer3D" parent="." unique_id=1274949119]
 stream = ExtResource("2_sopvs")
-volume_db = -25.0
+volume_db = -20.0
 max_db = 2.0
 pitch_scale = 0.6
 emission_angle_enabled = true

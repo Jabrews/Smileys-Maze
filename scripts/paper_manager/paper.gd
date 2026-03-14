@@ -80,6 +80,7 @@ func handle_succses_motion():
 	var down_tween = tween.tween_property(self, "position:y", position.y - 4.0, 0.9)
 	
 	down_tween.finished.connect(func():
+		GlSignalBus.emit_signal('delete_paper_coords', name)
 		self.queue_free()
 	)
 	
@@ -91,6 +92,7 @@ func handle_dud_motion() :
 	var tween = create_tween()
 	var up_tween = tween.tween_property(self, 'position:y', position.y + 15, 3)
 	up_tween.finished.connect(func():
+		GlSignalBus.emit_signal('delete_paper_coords', name)
 		self.queue_free()
 	)
 	

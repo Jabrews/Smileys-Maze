@@ -42,8 +42,9 @@ func _handle_paper_collected() :
 func set_can_blink(value: bool) -> void:
 	can_blink = value
 
-	if can_blink:
+	if can_blink && visible:
 		blink_interval_timer.start()
+		pass
 	
 ## ONLY OCCURS ON BLINKING
 func _on_blink_interval_timer_timeout() -> void:

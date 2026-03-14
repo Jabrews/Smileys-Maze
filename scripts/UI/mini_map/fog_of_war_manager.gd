@@ -23,7 +23,7 @@ func _handle_player_moved_shader_update(player_pos : Vector2) :
 	update_floor_shader(map_three_sprite_dark, map_three_sprite_light, player_pos, map_three_node)
 	
 	
-func update_floor_shader(map_dark : Sprite2D, map_light : Sprite2D, player_pos : Vector2, map_node):
+func update_floor_shader(map_dark : Sprite2D, map_light : Sprite2D, player_pos : Vector2, _map_node):
 
 	# dark map
 	if map_dark.material:

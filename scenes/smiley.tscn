@@ -1,10 +1,14 @@
 [gd_scene format=4 uid="uid://c7af8ybct8cpm"]
 
-[ext_resource type="Script" uid="uid://cub3spwe5igeu" path="res://scripts/smiley.gd" id="1_f6hl5"]
+[ext_resource type="Script" uid="uid://cub3spwe5igeu" path="res://scripts/smiley/smiley.gd" id="1_f6hl5"]
 [ext_resource type="Texture2D" uid="uid://dbrgw87d1prix" path="res://DeleteMe/Smiley_ShoulderR.png" id="1_j3oaa"]
 [ext_resource type="Texture2D" uid="uid://bhkp1mqh7r4i4" path="res://DeleteMe/Smiley_MaskUV.png" id="2_f6hl5"]
 [ext_resource type="Texture2D" uid="uid://c4ylf24krto8x" path="res://DeleteMe/Smiley_PelvisUV.png" id="3_yrcqe"]
 [ext_resource type="Texture2D" uid="uid://swtx86q34akj" path="res://DeleteMe/Smiley_TorsoUV.png" id="4_atir6"]
+[ext_resource type="Script" uid="uid://bbgufwikyiu3b" path="res://scripts/smiley/statemachine/smiley_state_machine.gd" id="7_53e8c"]
+[ext_resource type="PackedScene" uid="uid://c7bf5lea78w71" path="res://scenes/red_light_observer.tscn" id="7_atir6"]
+[ext_resource type="Script" uid="uid://dn8umgm1wqrdf" path="res://scripts/smiley/statemachine/smiley_idle_2.gd" id="8_usl1f"]
+[ext_resource type="Script" uid="uid://dg4630vbi4g5g" path="res://scripts/smiley/statemachine/smiley_door_open.gd" id="9_ewurb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pm6su"]
 
@@ -905,6 +909,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pqisx")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_atir6"]
+height = 4.206955
 
 [sub_resource type="Animation" id="Animation_2y76q"]
 resource_name = "ChaseRun"
@@ -1857,7 +1864,7 @@ tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = PackedFloat32Array(0, 1, -0.6168715, -1.8597356, -0.2, 0.033333335, 1, -0.6168715, -1.8597356, -0.2, 0.06666667, 1, -0.58937716, -1.8597356, -0.19999999, 0.1, 1, -0.5237767, -1.8597356, -0.19999997, 0.13333334, 1, -0.42055243, -1.8597356, -0.19999997, 0.16666667, 1, -0.29128093, -1.8597356, -0.2, 0.2, 1, -0.15043284, -1.8597356, -0.2, 0.23333333, 1, -0.01826717, -1.8597356, -0.2, 0.26666668, 1, 0.0936396, -1.8597356, -0.2, 0.3, 1, 0.17371075, -1.8597356, -0.2, 0.36666667, 1, 0.17371069, -1.8597356, -0.2, 0.4, 1, 0.0936395, -1.8597356, -0.2, 0.43333334, 1, -0.018267192, -1.8597356, -0.2, 0.46666667, 1, -0.1504328, -1.8597356, -0.2, 0.5, 1, -0.29128087, -1.8597356, -0.2, 0.53333336, 1, -0.4205525, -1.8597356, -0.2, 0.56666666, 1, -0.52377677, -1.8597356, -0.2, 0.5833333, 1, -0.57104766, -1.8597356, -0.2)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2i17"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_atir6"]
 _data = {
 &"ChaseRun": SubResource("Animation_2y76q"),
 &"ChaseStart": SubResource("Animation_jy02y"),
@@ -1867,16 +1874,13 @@ _data = {
 &"Walk": SubResource("Animation_hfvh3")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hcswj"]
-size = Vector3(3, 5.329529, 2)
-
-[node name="Smiley" type="CharacterBody3D" unique_id=497782624]
+[node name="Smiley" type="CharacterBody3D" unique_id=497782624 groups=["smiley"]]
 collision_layer = 128
 collision_mask = 3
 script = ExtResource("1_f6hl5")
 
 [node name="Armature" type="Node3D" parent="." unique_id=61099157]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.309232, -0.033850953)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.309232, -0.033850953)
 
 [node name="BodyCurve1" type="MeshInstance3D" parent="Armature" unique_id=433093309]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14757329, -2.2105634, -0.17052107)
@@ -2188,14 +2192,31 @@ bone_idx = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.084125, 0.8975172, -0.002613958)
 mesh = SubResource("ArrayMesh_tkote")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1507502518]
-libraries/ = SubResource("AnimationLibrary_e2i17")
-autoplay = &"Walk"
-speed_scale = 0.5
-
 [node name="MiniMapUpdateTimer" type="Timer" parent="." unique_id=1435529991]
-wait_time = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1350579829]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, -1)
-shape = SubResource("BoxShape3D_hcswj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1422806, 0)
+shape = SubResource("CapsuleShape3D_atir6")
+
+[node name="RedLightObserver" parent="." unique_id=1746474822 instance=ExtResource("7_atir6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1729367519]
+libraries/ = SubResource("AnimationLibrary_atir6")
+autoplay = &"ChaseRun"
+speed_scale = 0.5
+
+[node name="SmileyStateMachine" type="Node" parent="." unique_id=57656622]
+script = ExtResource("7_53e8c")
+
+[node name="Idle" type="Node" parent="SmileyStateMachine" unique_id=2123391944]
+script = ExtResource("8_usl1f")
+
+[node name="DoorOpen" type="Node" parent="SmileyStateMachine" unique_id=293095545]
+script = ExtResource("9_ewurb")
+
+[node name="WalkTimer" type="Timer" parent="SmileyStateMachine/DoorOpen" unique_id=1156225965]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="MiniMapUpdateTimer" to="." method="_on_mini_map_update_timer_timeout"]

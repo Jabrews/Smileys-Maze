@@ -66,12 +66,14 @@ func flicker_lights(floor_number : int) :
 	var random_index_two = randi() % light_children.size()
 	var random_element_two = light_children[random_index_two]
 	
-	# turn on blinking 	
-	if 'set_can_blink' in random_element_one:
+	if random_element_one != null and random_element_one.has_method("set_can_blink"):
+		await random_element_one.ready
 		random_element_one.set_can_blink(true)
-	if 'set_can_blink' in random_element_two :
+
+	if random_element_two != null and random_element_two.has_method("set_can_blink"):
+		await random_element_one.ready
 		random_element_two.set_can_blink(true)
-	
+
 
 	
 
