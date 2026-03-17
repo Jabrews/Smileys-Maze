@@ -99,12 +99,12 @@ func handle_player_move_paper(player_glob_pos) :
 	
 	var in_range = dist < 10.0
 
-	if in_range and not icon_sound_signal_sent:
+	if in_range and not icon_sound_signal_sent and get_parent().visible == true:
 		GlSoundManager.emit_signal('paper_alert')
 		GlSignalBus.emit_signal('player_near_paper')
 		icon_sound_signal_sent = true
 
-	elif not in_range and icon_sound_signal_sent:
+	elif not in_range and icon_sound_signal_sent and get_parent().visible == true:
 		icon_sound_signal_sent = false
 		GlSignalBus.emit_signal('player_not_near_paper')
 	

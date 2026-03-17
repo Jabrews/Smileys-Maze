@@ -11,7 +11,7 @@
 size = Vector3(0.36206055, 4.9833374, 3.9458008)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_83dcw"]
-size = Vector3(5.045988, 4.455017, 4.3978043)
+size = Vector3(7, 4.455017, 4.3978043)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_la1wf"]
 albedo_texture = ExtResource("1_hpvv5")
@@ -72,7 +72,7 @@ collision_layer = 0
 collision_mask = 129
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="OpenDoorArea" unique_id=926569127]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1883361, 0, 0.4637184)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21133018, 0, 0.4637184)
 shape = SubResource("BoxShape3D_83dcw")
 
 [node name="DoorMesh" type="MeshInstance3D" parent="." unique_id=793656431]

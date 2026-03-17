@@ -4,6 +4,8 @@ extends Node
 @onready var s_footsteps_stairwell := $FootstepsStairwell
 @onready var s_running_carpet := $RunCarpet
 @onready var s_running_stairwell := $RunStairwell
+@onready var s_chase_music := $ChaseMusic
+
 
 enum MoveState { IDLE, WALK, RUN }
 
@@ -17,6 +19,10 @@ func _ready() -> void:
 	GlSoundManager.connect("player_running", _on_player_running)
 	GlSoundManager.connect("player_stopped_running", _on_player_stopped_running)
 	GlSoundManager.connect("player_stairway_status", _handle_stairway_status_change)
+	# on chase start
+	GlSignalBus.connect('smiley_chase_intro_scene_start', _handle_chase_start)
+	# on chase end
+	GlSignalBus.connect('smiley_chase_end', _handle_chase_end)
 
 
 func _play_movement(is_running: bool) -> void:
@@ -69,3 +75,9 @@ func stop_all_sounds() -> void:
 	s_footsteps_stairwell.stop()
 	s_running_carpet.stop()
 	s_running_stairwell.stop()
+
+func _handle_chase_start(_floor_num : int) :
+	s_chase_music.play()
+
+func _handle_chase_end() :
+	s_chase_music.stop()

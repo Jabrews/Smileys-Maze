@@ -14,11 +14,14 @@ var t_bob = 0.0
 @onready var camera := $CameraPivot/Camera3D
 @onready var spot_light := $CameraPivot/FlashLightPivot/SpotLight3D
 
-var speed := 10
+var speed := 15
 var can_run : bool = true
 
 enum MoveState { IDLE, WALK, RUN }
 var current_state := MoveState.IDLE
+
+# chase movement lock
+var movement_lock : bool = false
 
 
 func _ready():
@@ -27,6 +30,12 @@ func _ready():
 	
 	await get_tree().process_frame
 	GlSignalBus.emit_signal('map_icon_object_init','PLAYER', global_position, name)
+	
+	# for chase start
+	GlSignalBus.connect('smiley_chase_intro_scene_start', _handle_chase_intro_start)
+	# for chase end
+	GlSignalBus.connect('smiley_chase_intro_scene_end', _handle_chase_intro_end)
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -34,6 +43,13 @@ func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
+	if movement_lock:
+		velocity.x = 0
+		velocity.z = 0
+		move_and_slide()
+		return
+	
 	
 	##### dir #####
 	var input_dir := Input.get_vector("left", "right", "up", "down")
@@ -46,7 +62,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-	
+		
 	
 	## -------- MOVEMENT SOUND STATE MACHINE --------
 	var moving := direction.length() > 0.0
@@ -146,3 +162,12 @@ func sound_emit_signals(type):
 func _on_mini_map_update_timer_timeout() -> void:
 	# for mini map
 	GlSignalBus.emit_signal('icon_moved', name, 'PLAYER', global_position)
+
+
+## chase start
+func _handle_chase_intro_start(_floor_num : int) :
+	movement_lock = true
+	
+func _handle_chase_intro_end() :
+	movement_lock = false 
+	

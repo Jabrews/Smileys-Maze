@@ -1,8 +1,8 @@
 extends Node
 
-@onready var floor_one_nodes := $"../FloorOneNodes"
-@onready var floor_two_nodes := $"../FloorTwoNodes"
-@onready var floor_three_nodes := $"../FloorThreeNodes"
+@export var floor_one_nodes : Node3D
+@export var floor_two_nodes : Node3D
+@export var floor_three_nodes : Node3D
 
 # children movement 
 @onready var spots_near_paper : Node = $SpotsNearPaper
@@ -60,6 +60,7 @@ func get_random_pos(floor_num : int) :
 	return floor_nodes_children[random_index]
 	
 func get_floor_nodes(floor_num : int) :
+	print(floor_one_nodes, floor_two_nodes, floor_three_nodes)
 	match floor_num:
 		1:
 			return floor_one_nodes

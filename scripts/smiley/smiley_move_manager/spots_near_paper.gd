@@ -22,9 +22,6 @@ func _ready() -> void:
 	
 	# populate spots near paper
 	floor_spots_near_paper_gen()
-	#print(floor_one_spots_near_paper)
-	#print(floor_two_spots_near_paper)
-	#print(floor_three_spots_near_paper)
 		
 # get each paper and find nodes around it
 func _handle_paper_object_created(paper_name, paper_glob_pos : Vector3, floor_num : int) :
@@ -120,7 +117,6 @@ func get_random_spot(floorNum: int):
 
 func _handle_delete_paper_coords(paper_name) :
 	var paper_index = paper_name_to_dic_index(paper_name)
-	print('deleting: ', paper_name)
 	
 	if 1 <= paper_index and paper_index <= 3:
 		floor_one_spots_near_paper.erase(paper_index)

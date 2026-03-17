@@ -22,6 +22,7 @@ func _process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 func _handle_smiley_change_floor(smiley_name, new_floor_num : int) :
+	
 	# if name is our smiley's instance
 	if smiley_name == name :
 		floor_num = new_floor_num

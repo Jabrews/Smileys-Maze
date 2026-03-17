@@ -2,20 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i6xxyk7skkd"
-path="res://.godot/imported/Smiley_ControllerUV.png-7cb527a20b0d9b390f3bd77c2913b838.ctex"
+uid="uid://bibwicbegrb6o"
+path.s3tc="res://.godot/imported/frowny_TorsoUV.png-fed56818aa88313709a9ebda404b9ae0.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "062f7940b402b86ae1aa73cb5c178572"
 }
 
 [deps]
 
-source_file="res://DeleteMe/Smiley_ControllerUV.png"
-dest_files=["res://.godot/imported/Smiley_ControllerUV.png-7cb527a20b0d9b390f3bd77c2913b838.ctex"]
+source_file="res://models/smiley_model/frowny/frowny_TorsoUV.png"
+dest_files=["res://.godot/imported/frowny_TorsoUV.png-fed56818aa88313709a9ebda404b9ae0.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +27,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

@@ -2,17 +2,16 @@ extends Node
 
 @onready var idle_state : Node = $Idle
 @onready var door_open_state : Node = $DoorOpen
-#@onready var chase_state : Node = $Chase
+@onready var chase_state : Node = $Chase
 
 # SHARED VARS
 @export var speed : float = 8.0
-@export var chase_speed : float = 10.0
 
 
 enum State {
 	IDLE,
 	DOOROPEN,
-	#CHASE
+	CHASE
 }
 
 var states : Dictionary
@@ -24,7 +23,7 @@ func _ready():
 	states = {
 		State.IDLE: idle_state,
 		State.DOOROPEN: door_open_state,
-		#State.CHASE: chase_state
+		State.CHASE: chase_state
 	}
 
 	switch_state(State.IDLE)

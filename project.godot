@@ -34,7 +34,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dither3d/plugin.cfg", "res://addons/relative_line_numbers/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/vim (copy 1)/plugin.cfg")
+enabled=PackedStringArray("res://addons/relative_line_numbers/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/vim (copy 1)/plugin.cfg")
 
 [global_group]
 
@@ -88,6 +88,7 @@ run={
 3d_physics/layer_6="hoverable"
 3d_physics/layer_7="vents"
 3d_physics/layer_8="smiley"
+3d_physics/layer_9="9"
 
 [navigation]
 

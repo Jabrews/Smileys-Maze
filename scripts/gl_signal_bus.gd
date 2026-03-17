@@ -48,3 +48,10 @@ signal smiley_change_floor(smiley_name, new_floor_num : int)
 
 ## Paper X Smiley Move Manager ##
 signal delete_paper_coords(paper_name)
+
+## Smiley Chase 
+signal smiley_chase_intro_scene_start(floor_num : int)
+signal smiley_chase_intro_scene_end()
+
+signal smiley_update_points(new_points : int)
+signal smiley_chase_end()

@@ -1,15 +1,19 @@
 extends Node
 
 # components
-@export var smiley_move_manager : Node 
+@export var smiley_move_manager : Node
 @onready var nav_agent : NavigationAgent3D = $"../../NavigationAgent3D"
 @onready var smiley : CharacterBody3D = $"../.."
 @export var player : CharacterBody3D
 @onready var animation_player : AnimationPlayer = $"../../AnimationPlayer"
 
 # move nodes / dice roll
-@export var smiley_move_nodes : Node
 var curr_target : Node3D
+@onready var force_move_timer : Timer = $"../../ForceMoveTimer"
+
+# for updating smiley if stuick
+var last_pos : Vector3
+var force_unstuck_loop : bool = false
 
 # switch to door state
 var can_open_door : bool = false
@@ -25,6 +29,18 @@ func state_start() :
 	
 func state_process(_delta) -> void :
 	
+	if last_pos == smiley.position :
+		if not force_unstuck_loop :
+			force_move_timer.start()
+			force_unstuck_loop = true
+
+	if last_pos != smiley.position :
+		force_move_timer.stop()
+		force_unstuck_loop = false
+				
+	
+	last_pos = smiley.position
+	
 	if not animation_player.is_playing() :
 		animation_player.play('Walk')
 	
@@ -32,6 +48,7 @@ func state_process(_delta) -> void :
 	if not curr_target :
 		curr_target = move_node_dice_roll()
 		smiley.velocity = Vector3.ZERO
+	
 	
 	# move to target node pos
 	if curr_target :
@@ -53,8 +70,8 @@ func state_process(_delta) -> void :
 			smiley.look_at(look_pos, Vector3.UP)
 
 		# moving smiley
-		smiley.velocity.x = direction.x * get_parent().speed  
-		smiley.velocity.z = direction.z * get_parent().speed 
+		smiley.velocity.x = direction.x * get_parent().speed
+		smiley.velocity.z = direction.z * get_parent().speed
 	#else:
 		#smiley.velocity.x = 0.0
 		#smiley.velocity.z = 0.0
@@ -105,11 +122,11 @@ func detect_door() :  #note : called in process
 
 			var next_path_pos : Vector3
 
-			if path.size() > 5:
-				next_path_pos = path[5]
+			if path.size() > 2:
+				next_path_pos = path[2]
 
-			elif path.size() > 3:
-				next_path_pos = path[3]
+			#elif path.size() > 3:
+				#next_path_pos = path[3]
 
 			else:
 				next_path_pos = nav_agent.get_next_path_position()
@@ -121,4 +138,20 @@ func detect_door() :  #note : called in process
 				next_path_pos
 			)
 			# switch state
+			force_move_timer.stop()
+			force_unstuck_loop = false
 			get_parent().switch_state(get_parent().State.DOOROPEN)
+
+
+func _on_force_move_timer_timeout() -> void:
+	var offset_right := smiley.global_transform.basis.x * 2
+	var offset_back := smiley.global_transform.basis.z * 2
+
+	var new_pos := smiley.global_position + offset_right + offset_back
+
+	# keep same height
+	new_pos.y = smiley.global_position.y
+	
+	smiley.global_position = new_pos
+
+# player in look radius

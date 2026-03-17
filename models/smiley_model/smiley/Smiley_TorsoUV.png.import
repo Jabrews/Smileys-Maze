@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhkp1mqh7r4i4"
-path.s3tc="res://.godot/imported/Smiley_MaskUV.png-6158869d94ac69896334c9ca381a0f98.s3tc.ctex"
+uid="uid://swtx86q34akj"
+path.s3tc="res://.godot/imported/Smiley_TorsoUV.png-b7c37bda0c7161f99b96348e1ecbc657.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://DeleteMe/Smiley_MaskUV.png"
-dest_files=["res://.godot/imported/Smiley_MaskUV.png-6158869d94ac69896334c9ca381a0f98.s3tc.ctex"]
+source_file="res://models/smiley_model/smiley/Smiley_TorsoUV.png"
+dest_files=["res://.godot/imported/Smiley_TorsoUV.png-b7c37bda0c7161f99b96348e1ecbc657.s3tc.ctex"]
 
 [params]
 
