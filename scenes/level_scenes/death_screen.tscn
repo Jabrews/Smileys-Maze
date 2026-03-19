@@ -1,0 +1,279 @@
+[gd_scene format=3 uid="uid://cvsej42kuk0cq"]
+
+[ext_resource type="Texture2D" uid="uid://dnxtc56kmends" path="res://models/UI/death_screen/death_sprite_1-Sheet.png" id="1_4nalm"]
+[ext_resource type="Shader" uid="uid://bpb8pntceu7xv" path="res://scripts/shaders/death_screen/1_death_screen.gdshader" id="1_6hbhl"]
+[ext_resource type="Script" uid="uid://divgb7te7pkbm" path="res://scripts/UI/death_screen_controller.gd" id="1_sroag"]
+[ext_resource type="Texture2D" uid="uid://d0jcvhseqdtxd" path="res://models/UI/death_screen/you_died.png" id="3_ifjf4"]
+[ext_resource type="Texture2D" uid="uid://bnqfh12nj5d3g" path="res://models/UI/death_screen/death_sprite_2.png" id="4_hnbv1"]
+[ext_resource type="Script" uid="uid://smgo84ej63gq" path="res://scripts/UI/die_text.gd" id="4_qeyuy"]
+[ext_resource type="Texture2D" uid="uid://b1wijv3jh5d47" path="res://models/UI/death_screen/death_sprite_3.png" id="5_et0p1"]
+[ext_resource type="FontFile" uid="uid://cihdsu5hrn0r3" path="res://models/UI/munro.ttf" id="5_mjc0b"]
+[ext_resource type="Script" uid="uid://bahbyt5kpfkak" path="res://scripts/UI/death_screen_btns/rety_btn.gd" id="6_6n8h4"]
+[ext_resource type="AudioStream" uid="uid://ba1kqf20kaaxl" path="res://sounds/music/death_screen_music.mp3" id="10_adn7t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifjf4"]
+shader = ExtResource("1_6hbhl")
+shader_parameter/pixel_size = 24.985
+shader_parameter/speed = 6.0
+shader_parameter/strength = 0.35
+shader_parameter/gray_min = -8.0
+shader_parameter/gray_max = 1.48
+shader_parameter/black_threshold = 0.08
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hbhl"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(0, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifjf4"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(320, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeyuy"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(640, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjc0b"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(960, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n8h4"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(1280, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sroag"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(1600, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnbv1"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(1920, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et0p1"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(2240, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adn7t"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(2560, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4pcm"]
+atlas = ExtResource("1_4nalm")
+region = Rect2(2880, 0, 320, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bh27x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hbhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifjf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeyuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjc0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n8h4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sroag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnbv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et0p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adn7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4pcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adn7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et0p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnbv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sroag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n8h4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjc0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeyuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifjf4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnbv1"]
+shader = ExtResource("1_6hbhl")
+shader_parameter/pixel_size = 24.985
+shader_parameter/speed = 6.0
+shader_parameter/strength = 0.35
+shader_parameter/gray_min = -8.0
+shader_parameter/gray_max = 1.48
+shader_parameter/black_threshold = 0.08
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bh27x"]
+atlas = ExtResource("4_hnbv1")
+region = Rect2(0, 0, 320, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0nxcj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bh27x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_et0p1"]
+shader = ExtResource("1_6hbhl")
+shader_parameter/pixel_size = 10.0
+shader_parameter/speed = 6.0
+shader_parameter/strength = 0.35
+shader_parameter/gray_min = 0.1
+shader_parameter/gray_max = 0.5
+shader_parameter/black_threshold = 0.03
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nxcj"]
+atlas = ExtResource("5_et0p1")
+region = Rect2(0, 0, 320, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_33vqs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nxcj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjc0b"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 12.0
+expand_margin_right = 12.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6n8h4"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 6.0
+expand_margin_right = 6.0
+anti_aliasing = false
+
+[node name="DeathScreenController" type="Control" unique_id=698864481]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sroag")
+
+[node name="DeathScreen1" type="AnimatedSprite2D" parent="." unique_id=1383150181]
+material = SubResource("ShaderMaterial_ifjf4")
+position = Vector2(160, 121)
+sprite_frames = SubResource("SpriteFrames_bh27x")
+autoplay = "default"
+frame_progress = 0.356035
+
+[node name="DeathScreen2" type="AnimatedSprite2D" parent="." unique_id=1135306713]
+visible = false
+material = SubResource("ShaderMaterial_hnbv1")
+position = Vector2(160, 121)
+sprite_frames = SubResource("SpriteFrames_0nxcj")
+
+[node name="DeathScreen3" type="AnimatedSprite2D" parent="." unique_id=160732163]
+visible = false
+material = SubResource("ShaderMaterial_et0p1")
+position = Vector2(160, 121)
+sprite_frames = SubResource("SpriteFrames_33vqs")
+
+[node name="DieText" type="Sprite2D" parent="." unique_id=155540490]
+position = Vector2(156, 39.000004)
+scale = Vector2(0.6000012, 0.48550048)
+texture = ExtResource("3_ifjf4")
+script = ExtResource("4_qeyuy")
+
+[node name="RetryBtn" type="Button" parent="." unique_id=1215567194]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 76.0
+offset_right = 183.0
+offset_bottom = 107.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.2946316, 0.39372784, 0.7526185, 1)
+theme_override_fonts/font = ExtResource("5_mjc0b")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_mjc0b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mjc0b")
+text = "Retry"
+script = ExtResource("6_6n8h4")
+
+[node name="MenuBtn" type="Button" parent="." unique_id=172349842]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 115.0
+offset_right = 183.0
+offset_bottom = 146.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.7845891, 0.106072925, 0.030674499, 1)
+theme_override_fonts/font = ExtResource("5_mjc0b")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_6n8h4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6n8h4")
+text = "Menu
+"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=677935059]
+position = Vector2(7, 1)
+stream = ExtResource("10_adn7t")
+autoplay = true
+
+[connection signal="button_down" from="RetryBtn" to="RetryBtn" method="_on_button_down"]

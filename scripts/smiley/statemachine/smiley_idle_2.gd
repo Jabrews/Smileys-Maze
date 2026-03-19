@@ -22,6 +22,7 @@ var reachable_door_pos = Vector3.ZERO
 func _ready() -> void:
 	nav_agent.connect('navigation_finished', _handle_nav_finished)
 	GlSignalBus.connect('toggle_smiley_in_door_radius', _handle_in_door_radius)
+	GlSignalBus.connect('smiley_chase_intro_scene_start', _handle_chase_start)
 
 func state_start() :
 
@@ -155,3 +156,11 @@ func _on_force_move_timer_timeout() -> void:
 	smiley.global_position = new_pos
 
 # player in look radius
+
+
+# for reset once chase starts
+func _handle_chase_start(_floor_num : int) :
+	print('reset curr_target')
+	curr_target = null
+	smiley.velocity = Vector3.ZERO
+	

@@ -15,6 +15,9 @@ func _on_floor_area_body_entered(body : Node3D) :
 		GlSignalBus.emit_signal("light_area_travel", enter_floor_num)
 		# mini map
 		GlSignalBus.emit_signal("icon_changed_floor", body.name, 'PLAYER', body.global_position, enter_floor_num)
-	elif body.is_in_group('smiley') :
+		# for smiley movement manager
+		GlSignalBus.emit_signal('player_changed_floor', enter_floor_num)
+		
+	if body.is_in_group('smiley') :
 		GlSignalBus.emit_signal("icon_changed_floor", body.name, 'SMILEY', body.global_position, enter_floor_num)
-		GlSignalBus.emit_signal('smiley_change_floor', body.name, enter_floor_num)
+		GlSignalBus.emit_signal('smiley_change_floor', enter_floor_num)

@@ -8,7 +8,8 @@ extends Node
 
 # points
 var chase_points = 100 
-var chase_speed = 6.0
+var default_chase_speed = 5.5
+var chase_speed = 5.5
 
 var intro_movement_lock : bool 
 
@@ -22,8 +23,13 @@ func _ready() -> void:
 	GlSignalBus.connect('smiley_chase_intro_scene_end', _on_chase_intro_scene_end)
 	# for door openig
 	GlSignalBus.connect('toggle_smiley_in_door_radius', _handle_in_door_radius)
+	# for increasing sprint 
+	GlLightingManager.connect('paper_collected', _handle_paper_collected)
+
 
 func state_start() -> void:
+	chase_speed = default_chase_speed
+	
 	# look at player
 	smiley.look_at(player.global_position)
 
@@ -59,7 +65,8 @@ func state_process(_delta) :
 		if not smiley.global_position.is_equal_approx(look_pos):
 			smiley.look_at(look_pos, Vector3.UP)
 		
-		smiley.velocity = direction * chase_speed 
+		smiley.velocity.x = direction.x * chase_speed 
+		smiley.velocity.z = direction.z * chase_speed 
 		
 		## DETECT DOOR LOOP CALL
 		detect_door()
@@ -73,21 +80,18 @@ func update_chase_points(new_points: int) -> void:
 	chase_points += new_points
 
 	if chase_points <= 100:
-		chase_speed = 6.5
+		chase_speed = default_chase_speed + 1
 	elif chase_points <= 200:
-		chase_speed = 7.0
+		chase_speed = default_chase_speed + 2
 	elif chase_points <= 300:
-		chase_speed = 8.0
+		chase_speed = default_chase_speed + 3
 	
-	if chase_points <= 0 :
-		print('chase end')
-		get_parent().switch_state(get_parent().State.IDLE)
-		
+	if chase_points <= 0 : get_parent().switch_state(get_parent().State.IDLE)
 
-		
 
 func state_end() :
-		print('state end')
+		# reset chase spped
+		chase_points = 100
 		GlSignalBus.emit_signal('smiley_chase_end')		
 		intro_movement_lock = true
 		animation_player.stop()
@@ -115,3 +119,11 @@ func detect_door() :  #note : called in process
 				"smiley_open_door",
 				reachable_door_pos,
 			)
+		
+func _handle_paper_collected() :
+	print('paper colleted')
+	default_chase_speed = default_chase_speed + 0.2
+	#in case in chase
+	chase_speed = chase_speed + 0.2
+		
+		

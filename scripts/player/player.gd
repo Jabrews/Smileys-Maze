@@ -14,7 +14,7 @@ var t_bob = 0.0
 @onready var camera := $CameraPivot/Camera3D
 @onready var spot_light := $CameraPivot/FlashLightPivot/SpotLight3D
 
-var speed := 15
+var speed := 10
 var can_run : bool = true
 
 enum MoveState { IDLE, WALK, RUN }

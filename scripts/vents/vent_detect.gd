@@ -22,6 +22,7 @@ func _process(_delta: float) -> void:
 				else:
 					new_floor += 1
 				GlSignalBus.emit_signal("icon_changed_floor", player.name, 'PLAYER', player.global_position,  new_floor)
+				GlSignalBus.emit_signal('player_changed_floor', new_floor)
 				
 				# activate vent_loading
 				GlSignalBus.emit_signal('vent_loop_init', collider.vent_downward)

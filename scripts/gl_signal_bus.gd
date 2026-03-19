@@ -1,10 +1,13 @@
 extends Node
 
+var curr_death_screen = 1
+
 
 ## player / stamina bar
 signal stamina_bar_depleted_status(toggleValue : bool)
 signal player_started_running
 signal player_stopped_running
+signal player_changed_floor(new_floor : int)
 
 ## vent / floor_light_area 
 signal vent_floor_travel(vent_floor : int , direction_down : bool) #also used in ActiveMapController
@@ -44,7 +47,7 @@ signal paper_object_created(paper_name, paper_glob_pos : Vector3, floor_num : in
 signal player_near_paper()
 signal player_not_near_paper()
 ## Floor Traversal Area X Smiley Move Manager ##
-signal smiley_change_floor(smiley_name, new_floor_num : int)
+signal smiley_change_floor(new_floor_num : int)
 
 ## Paper X Smiley Move Manager ##
 signal delete_paper_coords(paper_name)
@@ -55,3 +58,5 @@ signal smiley_chase_intro_scene_end()
 
 signal smiley_update_points(new_points : int)
 signal smiley_chase_end()
+signal smiley_caught_player()
+	

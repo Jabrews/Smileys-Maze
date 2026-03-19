@@ -21,8 +21,11 @@ func _process(delta: float) -> void:
 	if not is_on_floor() : 
 		velocity += get_gravity() * delta
 
-func _handle_smiley_change_floor(smiley_name, new_floor_num : int) :
-	
-	# if name is our smiley's instance
-	if smiley_name == name :
-		floor_num = new_floor_num
+func _handle_smiley_change_floor(new_floor_num : int) :
+	print('update new floor : ', new_floor_num)
+	floor_num = new_floor_num
+
+
+func _on_catch_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group('player') :
+		GlSignalBus.emit_signal('smiley_caught_player')

@@ -8,47 +8,52 @@ extends Node
 @onready var spots_near_paper : Node = $SpotsNearPaper
 @onready var spots_near_player : Node = $SpotsNearPlayer
 
+var player_curr_floor : int = 1
+
+func _ready() -> void:
+	GlSignalBus.connect('player_changed_floor', _handle_player_changed_floor)
+
 
 # called by smiley in idle
 func dice_roll_for_pos(floor_num : int) :
-	# see if player near paper valid
-	var player_near_paper_move_node = spots_near_player.get_closest_node(floor_num)
 
-	# roll 1–100
+	if player_curr_floor != floor_num:
+		floor_num = player_curr_floor					
+
+	var player_near_paper_move_node = spots_near_player.get_closest_node(floor_num)
 	var dice_roll = randi_range(1,100)
 
 	if player_near_paper_move_node:
 
-		# 50% go near player
 		if dice_roll <= 50:
+			print("picked (player):", player_near_paper_move_node.name)
 			return player_near_paper_move_node
 
-		# 25% go to paper node
 		elif dice_roll <= 75:
 			var spot_near_paper = spots_near_paper.get_random_spot(floor_num)
 			if spot_near_paper:
+				print("picked (paper):", spot_near_paper.name)
 				return spot_near_paper
 			else:
+				print("picked (fallback player):", player_near_paper_move_node.name)
 				return player_near_paper_move_node
 
-		# 25% random roam
 		else:
-			return get_random_pos(floor_num)
+			var rand = get_random_pos(floor_num)
+			print("picked (random):", rand.name)
+			return rand
 
 	else:
-		# player not near paper
 
-		# 60% paper
 		if dice_roll <= 60:
 			var spot_near_paper = spots_near_paper.get_random_spot(floor_num)
 			if spot_near_paper:
+				print("picked (paper no player):", spot_near_paper.name)
 				return spot_near_paper
 
-		# 40% random
-		return get_random_pos(floor_num)
-	
-	
-	
+		var rand = get_random_pos(floor_num)
+		print("picked (random no player):", rand.name)
+		return rand
 	
 
 func get_random_pos(floor_num : int) :
@@ -68,3 +73,6 @@ func get_floor_nodes(floor_num : int) :
 			return floor_two_nodes
 		3:
 			return floor_three_nodes
+
+func _handle_player_changed_floor(new_player_floor_num : int) :
+	player_curr_floor = new_player_floor_num

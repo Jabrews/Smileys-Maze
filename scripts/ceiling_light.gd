@@ -101,7 +101,6 @@ func _handle_chase_intro_end():
 
 
 func _handle_chase_end():
-	print('ceiling chase end')
 
 	set_can_blink(false)
 	blink_interval_timer.stop()

@@ -974,7 +974,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e0uxa"]
-height = 4.206955
+height = 3.4355087
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88egj"]
 resource_name = "Skin"
@@ -1816,7 +1816,7 @@ shadow_mesh = SubResource("ArrayMesh_pqisx")
 points = PackedVector3Array(4, 0, 0, 0, 0, 10, -4, 0, 0, 0, 2, 0, 0, -2, 0)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_e06n5"]
-points = PackedVector3Array(4, 0, 0, 0, 0, 22, -4, 0, 0, 0, 2, 0, 0, -2, 0)
+points = PackedVector3Array(4, 0, 0, 0, 0, 15, -4, 0, 0, 0, 2, 0, 0, -2, 0)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_d7fkt"]
 height = 0.049804688
@@ -1833,7 +1833,7 @@ autoplay = &"ChaseRun"
 speed_scale = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=998636687]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1422806, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7565575, 0)
 shape = SubResource("CapsuleShape3D_e0uxa")
 
 [node name="Armature" type="Node3D" parent="." unique_id=1511710215]
@@ -2150,11 +2150,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 script = ExtResource("7_53e8c")
 speed = 5.0
 
-[node name="Idle" type="Node" parent="SmileyStateMachine" unique_id=823206560 node_paths=PackedStringArray("smiley_move_manager", "player", "smiley_move_nodes")]
+[node name="Idle" type="Node" parent="SmileyStateMachine" unique_id=823206560]
 script = ExtResource("8_usl1f")
-smiley_move_manager = NodePath("")
-player = NodePath("")
-smiley_move_nodes = NodePath("")
 
 [node name="DoorOpen" type="Node" parent="SmileyStateMachine" unique_id=116566471]
 script = ExtResource("9_ewurb")
@@ -2163,19 +2160,17 @@ script = ExtResource("9_ewurb")
 wait_time = 4.0
 one_shot = true
 
-[node name="Chase" type="Node" parent="SmileyStateMachine" unique_id=1669865552 node_paths=PackedStringArray("player")]
+[node name="Chase" type="Node" parent="SmileyStateMachine" unique_id=1669865552]
 script = ExtResource("10_2grwi")
-player = NodePath("")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=147166598]
 
 [node name="ForceMoveTimer" type="Timer" parent="." unique_id=1562855474]
 wait_time = 2.0
 
-[node name="ChaseComponents" type="Node3D" parent="." unique_id=1816560632 node_paths=PackedStringArray("smiley_state_machine")]
+[node name="ChaseComponents" type="Node3D" parent="." unique_id=1816560632]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.578703, -2.296566)
 script = ExtResource("11_w2cqa")
-smiley_state_machine = NodePath("")
 
 [node name="ConeVision" type="Area3D" parent="ChaseComponents" unique_id=1663578156]
 collision_layer = 0
@@ -2196,7 +2191,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2104492, 0)
 shape = SubResource("CylinderShape3D_d7fkt")
 
 [node name="RayCast" type="RayCast3D" parent="ChaseComponents" unique_id=1669280727]
-target_position = Vector3(0, 0, -20)
+target_position = Vector3(0, 0, -15)
 collision_mask = 3
 collide_with_areas = true
 debug_shape_custom_color = Color(0.90588236, 0, 0, 1)
