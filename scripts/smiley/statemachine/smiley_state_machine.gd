@@ -64,12 +64,14 @@ func _process(delta):
 func _handle_player_change_floor(player_floor_num : int) :
 	# speed up if floor diff
 	if player_floor_num != get_parent().floor_num :
+		print('speed up smiley')
 		target_player_floor_num = player_floor_num
 		change_floor_loop = true
 		speed += 20
 
 func _handle_smiley_change_floor(smiley_floor_num : int) :
 	if smiley_floor_num == target_player_floor_num:
+		print('speed down smiley')
 		speed -= 20
 		change_floor_loop = false
 

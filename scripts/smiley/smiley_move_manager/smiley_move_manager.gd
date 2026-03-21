@@ -26,21 +26,21 @@ func dice_roll_for_pos(floor_num : int) :
 	if player_near_paper_move_node:
 
 		if dice_roll <= 50:
-			print("picked (player):", player_near_paper_move_node.name)
+			#print("picked (player):", player_near_paper_move_node.name)
 			return player_near_paper_move_node
 
 		elif dice_roll <= 75:
 			var spot_near_paper = spots_near_paper.get_random_spot(floor_num)
 			if spot_near_paper:
-				print("picked (paper):", spot_near_paper.name)
+				#print("picked (paper):", spot_near_paper.name)
 				return spot_near_paper
 			else:
-				print("picked (fallback player):", player_near_paper_move_node.name)
+				#print("picked (fallback player):", player_near_paper_move_node.name)
 				return player_near_paper_move_node
 
 		else:
 			var rand = get_random_pos(floor_num)
-			print("picked (random):", rand.name)
+			#print("picked (random):", rand.name)
 			return rand
 
 	else:
@@ -48,11 +48,11 @@ func dice_roll_for_pos(floor_num : int) :
 		if dice_roll <= 60:
 			var spot_near_paper = spots_near_paper.get_random_spot(floor_num)
 			if spot_near_paper:
-				print("picked (paper no player):", spot_near_paper.name)
+				#print("picked (paper no player):", spot_near_paper.name)
 				return spot_near_paper
 
 		var rand = get_random_pos(floor_num)
-		print("picked (random no player):", rand.name)
+		#print("picked (random no player):", rand.name)
 		return rand
 	
 
@@ -65,7 +65,7 @@ func get_random_pos(floor_num : int) :
 	return floor_nodes_children[random_index]
 	
 func get_floor_nodes(floor_num : int) :
-	print(floor_one_nodes, floor_two_nodes, floor_three_nodes)
+	#print(floor_one_nodes, floor_two_nodes, floor_three_nodes)
 	match floor_num:
 		1:
 			return floor_one_nodes

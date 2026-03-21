@@ -10,7 +10,12 @@ var totalPapersCollected : int = 0
 func _ready() -> void:
 	connect('paper_collected', _handle_paper_collected)	
 	
+	# for resetting level
+	GlSignalBus.connect('smiley_caught_player', _handle_smiley_caught_player)
+	
 	
 func _handle_paper_collected() :
 	totalPapersCollected += 1
 	
+func _handle_smiley_caught_player() :
+	totalPapersCollected = 0

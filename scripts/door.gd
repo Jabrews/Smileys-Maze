@@ -46,6 +46,7 @@ func _process(_delta: float) -> void:
 func open_door():
 	
 	s_door_open.play()
+	door_static_body.set_collision_layer_value(2, false)
 	
 	door_coll_delay.start()
 	door_coll_shape.disabled = true
@@ -65,7 +66,7 @@ func open_door():
 
 
 func close_door():
-	
+		
 	s_door_close.play()
 	door_static_body.set_collision_layer_value(2, true)
 	

@@ -493,9 +493,8 @@ data = PackedVector3Array(0.0068054833, 0.5, -0.24999952, -0.006805487, 0.5, 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpqyj"]
 resource_name = "Material.003"
-cull_mode = 2
+cull_mode = 1
 albedo_texture = ExtResource("10_aw5uu")
-roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yff4s"]
 _surfaces = [{

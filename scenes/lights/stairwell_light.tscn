@@ -20,7 +20,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ulcvy"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_b10sy"]
 resource_name = "Cube_004"
 _surfaces = [{
 "aabb": AABB(-0.023199998, -0.024939748, -0.023862015, 0.0416, 0.046034798, 0.07720521),
@@ -38,34 +38,22 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_wn5a6")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_b10sy"]
-radius = 1.1393195
+[node name="StairWellLight" type="MeshInstance3D" unique_id=1323089800]
+transform = Transform3D(6.25, 2.775558e-15, 6.617445e-22, -4.135903e-22, 2.2351742e-06, -6.2499995, -2.775558e-15, 6.2499995, 2.2351742e-06, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ulcvy")
+mesh = SubResource("ArrayMesh_b10sy")
 
-[node name="stairwell_light" type="StaticBody3D" unique_id=1400731926 groups=["lights"]]
-collision_layer = 16
-collision_mask = 0
-metadata/light_type = "stairwell"
-
-[node name="BlockLight" type="OmniLight3D" parent="." unique_id=776779319]
-transform = Transform3D(1, 4.440892e-16, 9.2644254e-23, -6.6174424e-23, 3.5762787e-07, -1, -4.440892e-16, 1, 3.5762787e-07, 0.51, 0.19189292, -1.1229537)
-light_energy = 0.5
+[node name="BlockLight" type="OmniLight3D" parent="." unique_id=185402502]
+transform = Transform3D(0.16000001, 7.1054285e-17, -3.1058815e-24, 0, -6.9938233e-09, -0.16000003, -7.105428e-17, 0.16000003, -6.9938233e-09, -0.001978264, -0.0037998576, 0.031455513)
+light_energy = 1.2
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
 shadow_reverse_cull_face = true
-omni_range = 15.0
-omni_attenuation = 5.574
+omni_attenuation = -1.0
 
-[node name="StairWellLight" type="MeshInstance3D" parent="." unique_id=164612851]
-transform = Transform3D(6.25, 2.775558e-15, 6.617445e-22, -4.135903e-22, 2.2351742e-06, -6.2499995, -2.775558e-15, 6.2499995, 2.2351742e-06, 0.51, 0.35032827, -0.14000008)
-material_override = SubResource("StandardMaterial3D_ulcvy")
-mesh = SubResource("ArrayMesh_ulcvy")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=736543948]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44031733, 0, -0.21980298)
-shape = SubResource("SphereShape3D_b10sy")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=185232436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5244615, 0.18150449, -0.11769667)
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=624513265]
+transform = Transform3D(1, -2.0679514e-22, 1.972152e-29, 2.0679514e-22, 1, -2.2204457e-14, -1.9721515e-29, 2.2204457e-14, 1, -0.009925269, -0.0004253313, 0.022083744)
 light_energy = 0.5
 omni_range = 1.0
-omni_attenuation = 2.852
+omni_attenuation = 4.276
