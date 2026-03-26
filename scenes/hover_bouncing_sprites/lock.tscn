@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cr2b7a261ab65"]
+
+[ext_resource type="Texture2D" uid="uid://dm116u78yjyxi" path="res://scenes/hover_bouncing_sprites/lock.png" id="1_n8nn8"]
+[ext_resource type="Script" uid="uid://bg8oen0areu20" path="res://reusable/hover_mesh_system/bouncing_sprite/bouncing_sprite.gd" id="2_4pa8w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pa8w"]
+atlas = ExtResource("1_n8nn8")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cxmkn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pa8w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Lock" type="AnimatedSprite3D" unique_id=1042507121]
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_cxmkn")
+frame_progress = 0.63351524
+script = ExtResource("2_4pa8w")

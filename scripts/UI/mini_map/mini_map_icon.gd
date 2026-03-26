@@ -2,10 +2,13 @@ extends Sprite2D
 
 @onready var paper_collect_particle : CPUParticles2D = $PaperCollectParticle
 
-@export_enum("VENT-UP", "VENT-DOWN", "PAPER", "PLAYER")
+@export_enum("VENT-UP", "VENT-DOWN", "PAPER", "PLAYER", "ELEVATOR")
 var icon_type : String
 
 @export var reveal_radius : float = 20.0
+
+# elevator icon
+var flash_tween : Tween
 
 # only for smiley
 var icon_sound_signal_sent : bool = false 
@@ -15,6 +18,9 @@ var vent_down_sprite = preload("res://models/UI/mini_map/vent_up.png")
 var paper_sprite = preload("res://models/UI/mini_map/paper.png")
 var player_sprite = preload("res://models/UI/mini_map/player_sprite.png")
 var smiley_sprite = preload("res://models/UI/mini_map/smiley.png")
+var elevator_sprite = preload("res://models/UI/mini_map/elevator-icon.png")
+
+
 # shader for smiley
 var smiley_shader = preload("res://scripts/shaders/smiley_icon.gdshader")
 
@@ -49,6 +55,14 @@ func _ready() -> void:
 		material.shader = smiley_shader
 		material.set_shader_parameter("distort_enabled", true)
 		GlSignalBus.connect('player_moved', _handle_player_moved)
+		
+	
+	if icon_type == 'ELEVATOR' :
+		texture = elevator_sprite 
+		
+		GlSignalBus.connect('all_papers_collected', _handle_all_papers_collected)
+		GlSignalBus.connect('stop_end_time_ticking', _handle_stop_end_time_ticking)
+		
 
 	
 	
@@ -115,3 +129,35 @@ func paper_movement() :
 	tween.tween_property(self, 'position:y', position.y + 1, 0.5)
 	tween.tween_property(self, 'position:y', position.y + -1 , 0.5)
 	
+
+
+func _handle_all_papers_collected() :
+	if flash_tween:
+		flash_tween.kill()
+	
+	flash_tween = create_tween()
+	flash_tween.set_loops()
+	
+	var normal_color = Color(1,1,1,1)
+	var blue_color = Color(0.6, 0.8, 1.0, 1.0) # light blue
+	var white_color = Color(1,1,1,1)
+	
+	# 1 second total cycle
+	flash_tween.tween_property(self, "modulate", blue_color, 1.0)
+	flash_tween.tween_property(self, "modulate", white_color, 1.0)
+	flash_tween.tween_property(self, "modulate", normal_color, 1.0)
+	
+	
+func _handle_stop_end_time_ticking() :
+	
+	var normal_color = Color(1,1,1,1)
+	
+	flash_tween.stop()	
+	
+	flash_tween.tween_property(self, "modulate", normal_color, 1.0)
+	
+	if flash_tween:
+		flash_tween.kill()
+	
+	
+		

@@ -11,6 +11,7 @@ extends Node
 @export var movement_possible = false
 # can leave this blank
 @export var bouncing_sprite_scene : PackedScene
+@export var custom_b_sprite_pos : Vector3
 var bouncing_sprite = null
 
 @export var original_coll_shape : CollisionShape3D
@@ -81,7 +82,10 @@ func handle_create_bouncing_sprite() :
 	add_child(bouncing_sprite)
 	
 	# pos / transform
-	bouncing_sprite.global_position = orignal_mesh.global_position + Vector3(1, 1, 1) # adjust
+	if custom_b_sprite_pos :
+		bouncing_sprite.global_position = orignal_mesh.global_position + custom_b_sprite_pos
+	else : 
+		bouncing_sprite.global_position = orignal_mesh.global_position + Vector3(1, 1, 1) # adjust
 	# notice sprite is billboard so not roation nessesary
 	bouncing_sprite.show_bouncing_sprite()
 	

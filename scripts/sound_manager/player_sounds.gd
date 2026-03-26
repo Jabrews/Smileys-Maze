@@ -6,11 +6,18 @@ extends Node
 @onready var s_running_stairwell := $RunStairwell
 @onready var s_chase_music := $ChaseMusic
 
+@onready var s_end_section_music := $EndSectionMusic
+@onready var s_ambience := $"../Ambience"
+
 
 enum MoveState { IDLE, WALK, RUN }
 
 var player_in_stairway : bool = false
 var current_state := MoveState.IDLE
+
+# for pausing end scene music
+var playing_end_music : bool = false 
+
 
 
 func _ready() -> void:
@@ -23,6 +30,10 @@ func _ready() -> void:
 	GlSignalBus.connect('smiley_chase_intro_scene_start', _handle_chase_start)
 	# on chase end
 	GlSignalBus.connect('smiley_chase_end', _handle_chase_end)
+	# on end scene start	
+	GlSignalBus.connect('all_papers_collected', _handle_all_papers_collected)
+	
+	
 
 
 func _play_movement(is_running: bool) -> void:
@@ -78,6 +89,19 @@ func stop_all_sounds() -> void:
 
 func _handle_chase_start(_floor_num : int) :
 	s_chase_music.play()
+	if playing_end_music :
+		s_end_section_music.volume_db = -80
 
 func _handle_chase_end() :
 	s_chase_music.stop()
+	if playing_end_music :
+		s_end_section_music.volume_db = -20.0
+
+func _handle_all_papers_collected() :
+	playing_end_music = true
+	s_end_section_music.play()
+	s_ambience.stop()
+
+func _on_end_section_music_finished() -> void:
+	s_ambience.start()
+	playing_end_music = false

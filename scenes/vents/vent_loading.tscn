@@ -66,3 +66,12 @@ mesh = SubResource("ArrayMesh_280fh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VentMesh/Vent" unique_id=53631404]
 shape = SubResource("ConcavePolygonShape3D_i5mst")
+
+[node name="VentMesh" type="MeshInstance3D" parent="VentMesh" unique_id=469892977]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 0, 44.056583, 0)
+mesh = SubResource("ArrayMesh_280fh")
+
+[node name="Vent" type="StaticBody3D" parent="VentMesh/VentMesh" unique_id=249040656]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VentMesh/VentMesh/Vent" unique_id=2091396151]
+shape = SubResource("ConcavePolygonShape3D_i5mst")

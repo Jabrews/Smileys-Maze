@@ -4,6 +4,7 @@ extends Control
 
 func _ready() -> void:
 	GlLightingManager.connect('paper_collected', _handle_paper_collected)
+	GlSignalBus.connect('all_papers_collected', _handle_all_papers_collected)
 	
 	size_tween()
 	color_tween()
@@ -33,3 +34,9 @@ func color_tween() :
 	tween.tween_property(self, 'modulate', Color.BLACK, 0.2)
 	tween.tween_property(self, 'modulate', Color.WHITE, 0.5)
 	tween.tween_property(self, 'modulate', curr_modulate, 0.5)
+
+func _handle_all_papers_collected() :
+	visible = false	
+	
+	
+	

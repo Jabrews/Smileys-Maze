@@ -60,3 +60,11 @@ signal smiley_update_points(new_points : int)
 signal smiley_chase_end()
 signal smiley_caught_player()
 	
+# elevator	 
+signal elevator_arrived()
+signal all_papers_collected()
+# elevator / end ui
+signal game_end_fade()
+
+# elevator / escape time
+signal stop_end_time_ticking()

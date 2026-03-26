@@ -34,7 +34,7 @@ func _ready() -> void:
 	# increase detect player area lengths with each note
 	GlLightingManager.connect('paper_collected', _handle_player_collected_paper)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not player:
 		return
 
@@ -63,7 +63,9 @@ func _handle_detection(type: String):
 
 	# switch to chase if idle
 	if smiley_state_machine.curr_state == smiley_state_machine.idle_state:
+		GlStats.chases_encountered += 1		
 		smiley_state_machine.switch_state(State.CHASE)
+
 
 	# only run logic in chase
 	if smiley_state_machine.curr_state != smiley_state_machine.chase_state:

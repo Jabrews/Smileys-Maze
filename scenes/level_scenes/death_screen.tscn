@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://cihdsu5hrn0r3" path="res://models/UI/munro.ttf" id="5_mjc0b"]
 [ext_resource type="Script" uid="uid://bahbyt5kpfkak" path="res://scripts/UI/death_screen_btns/rety_btn.gd" id="6_6n8h4"]
 [ext_resource type="AudioStream" uid="uid://ba1kqf20kaaxl" path="res://sounds/music/death_screen_music.mp3" id="10_adn7t"]
+[ext_resource type="Script" uid="uid://paljfhm8f066" path="res://scripts/UI/death_screen_btns/menu_btn.gd" id="10_h4pcm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ifjf4"]
 shader = ExtResource("1_6hbhl")
@@ -270,6 +271,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6n8h4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6n8h4")
 text = "Menu
 "
+script = ExtResource("10_h4pcm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=677935059]
 position = Vector2(7, 1)
@@ -277,3 +279,8 @@ stream = ExtResource("10_adn7t")
 autoplay = true
 
 [connection signal="button_down" from="RetryBtn" to="RetryBtn" method="_on_button_down"]
+[connection signal="mouse_entered" from="RetryBtn" to="RetryBtn" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="RetryBtn" to="RetryBtn" method="_on_mouse_exited"]
+[connection signal="button_down" from="MenuBtn" to="MenuBtn" method="_on_button_down"]
+[connection signal="mouse_entered" from="MenuBtn" to="MenuBtn" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MenuBtn" to="MenuBtn" method="_on_mouse_exited"]

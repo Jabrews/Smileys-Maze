@@ -3,11 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://df7bbmia200sr" path="res://scenes/hover_bouncing_sprites/arrow_down.png" id="1_se3su"]
 [ext_resource type="Script" uid="uid://bg8oen0areu20" path="res://reusable/hover_mesh_system/bouncing_sprite/bouncing_sprite.gd" id="2_cxmkn"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_cxmkn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxmkn"]
+atlas = ExtResource("1_se3su")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wjwdu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_se3su")
+"texture": SubResource("AtlasTexture_cxmkn")
 }],
 "loop": true,
 "name": &"default",
@@ -16,5 +20,5 @@ animations = [{
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" unique_id=1042507121]
 billboard = 1
-sprite_frames = SubResource("SpriteFrames_cxmkn")
+sprite_frames = SubResource("SpriteFrames_wjwdu")
 script = ExtResource("2_cxmkn")

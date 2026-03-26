@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ybikvaxa2vll" path="res://scripts/UI/stamina_bar.gd" id="1_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://dh0e72rgwkgc2" path="res://models/UI/stamina_bar/Stamina-Bar-BG.png" id="1_nt7q6"]
+[ext_resource type="Script" uid="uid://q05u1yd5m8lx" path="res://scripts/UI/ui_controller.gd" id="1_pawqx"]
 [ext_resource type="Texture2D" uid="uid://burpg3v527jdx" path="res://models/UI/stamina_bar/Stamina-Bar-Increment-export.png" id="2_x4jx1"]
 [ext_resource type="Texture2D" uid="uid://dncm421wt472v" path="res://models/UI/stamina_bar/Stamina-Bar-Speed.png" id="3_yev5y"]
 [ext_resource type="Script" uid="uid://d25j5diox2lwu" path="res://scripts/UI/paper_count.gd" id="5_p7vwb"]
@@ -31,6 +32,13 @@
 [ext_resource type="Texture2D" uid="uid://b1uk6hqifm616" path="res://models/UI/bloodlust_coins/coin2.png" id="28_i5tog"]
 [ext_resource type="Texture2D" uid="uid://dp74nghudc1ed" path="res://models/UI/bloodlust_coins/coin1.png" id="29_rleeb"]
 [ext_resource type="Texture2D" uid="uid://bon7hm2n3gq1o" path="res://models/UI/bloodlust_coins/bloodlust-text.png" id="31_wquew"]
+[ext_resource type="Texture2D" uid="uid://cvx8ob1wvpr7w" path="res://models/UI/escape_timer/clock.png" id="33_3vrs6"]
+[ext_resource type="Script" uid="uid://ixds23nn71j8" path="res://scripts/UI/escape_timer.gd" id="33_5ls34"]
+[ext_resource type="FontFile" uid="uid://cwp7e2ec1xcxl" path="res://models/UI/font_1.ttf" id="34_ukrhx"]
+[ext_resource type="AudioStream" uid="uid://coknfig1ct1et" path="res://sounds/bell_ring.mp3" id="36_fsl8s"]
+[ext_resource type="AudioStream" uid="uid://dkmrkgp8e072e" path="res://sounds/whoosh.mp3" id="37_x4rqp"]
+[ext_resource type="Script" uid="uid://dira14oj7sp0a" path="res://scripts/UI/chase_edge.gd" id="38_6bb67"]
+[ext_resource type="Texture2D" uid="uid://bn8di4j5pdlga" path="res://models/UI/chase_edge/chase_edge.png" id="38_mgb8n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p7vwb"]
 font = ExtResource("6_8dubc")
@@ -336,12 +344,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="UI" type="Control" unique_id=653024877]
+[node name="UI" type="Control" unique_id=653024877 node_paths=PackedStringArray("stamina_bar", "paper_count", "blood_lust_coins", "minimap_control", "minimap_floor_one", "fade_to_black_rect")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 320.0
 offset_bottom = 240.0
 mouse_filter = 2
+script = ExtResource("1_pawqx")
+stamina_bar = NodePath("StaminaBar")
+paper_count = NodePath("PaperCount")
+blood_lust_coins = NodePath("BloodLustCoin")
+minimap_control = NodePath("MiniMapLayer/MiniMapController")
+minimap_floor_one = NodePath("MiniMapLayer/MiniMapController/MapFloorOne")
+fade_to_black_rect = NodePath("FadeToBlack")
 
 [node name="StaminaBar" type="Control" parent="." unique_id=541784968]
 modulate = Color(0.9004175, 0.80598444, 0.5833873, 1)
@@ -578,6 +593,91 @@ autoplay = "1"
 position = Vector2(136, -30)
 texture = ExtResource("31_wquew")
 
+[node name="FadeToBlack" type="ColorRect" parent="." unique_id=78958498]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EscapeTimer" type="Control" parent="." unique_id=1803313935]
+visible = false
+modulate = Color(0.9004175, 0.80598444, 0.5833873, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.5258789e-05
+offset_right = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+script = ExtResource("33_5ls34")
+
+[node name="Sprite2D" type="Sprite2D" parent="EscapeTimer" unique_id=1973302630]
+texture = ExtResource("33_3vrs6")
+
+[node name="Label2" type="Label" parent="EscapeTimer" unique_id=1589865771]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -24.5
+offset_right = 20.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.18431373, 0.6117647, 0.047058824, 1)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.31764707, 0.07058824, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("34_ukrhx")
+theme_override_font_sizes/font_size = 7
+text = "130"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BellRing" type="AudioStreamPlayer2D" parent="EscapeTimer" unique_id=813896263]
+stream = ExtResource("36_fsl8s")
+volume_db = 7.0
+
+[node name="Whoosh" type="AudioStreamPlayer2D" parent="EscapeTimer" unique_id=942553743]
+stream = ExtResource("37_x4rqp")
+
+[node name="TimerIncrement" type="Timer" parent="EscapeTimer" unique_id=740508519]
+wait_time = 0.7
+ignore_time_scale = true
+
+[node name="Label" type="Label" parent="EscapeTimer" unique_id=2107333788]
+layout_mode = 0
+offset_left = -42.800003
+offset_top = 25.400002
+offset_right = 47.199997
+offset_bottom = 48.4
+theme_override_colors/font_color = Color(1, 1, 1, 0.45490196)
+theme_override_fonts/font = ExtResource("34_ukrhx")
+theme_override_font_sizes/font_size = 8
+text = "Get To The
+Elevator"
+
+[node name="ChaseEdge" type="Sprite2D" parent="." unique_id=1237313135]
+visible = false
+position = Vector2(160, 120)
+texture = ExtResource("38_mgb8n")
+script = ExtResource("38_6bb67")
+
 [connection signal="timeout" from="StaminaBar/RunIncrementDown" to="StaminaBar" method="_on_run_increment_down_timeout"]
 [connection signal="timeout" from="StaminaBar/RunIncrementUp" to="StaminaBar" method="_on_run_increment_up_timeout"]
 [connection signal="timeout" from="MiniMapLayer/MiniMapAlertModulate/AlertLockTimer" to="MiniMapLayer/MiniMapAlertModulate" method="_on_alert_lock_timer_timeout"]
+[connection signal="timeout" from="EscapeTimer/TimerIncrement" to="EscapeTimer" method="_on_timer_increment_timeout"]

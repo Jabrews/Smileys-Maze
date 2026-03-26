@@ -1,0 +1,216 @@
+[gd_scene format=3 uid="uid://1or5vfej7kva"]
+
+[ext_resource type="Texture2D" uid="uid://bgfytoqydb16u" path="res://models/UI/completion_screen/bg.png" id="1_a1em1"]
+[ext_resource type="Texture2D" uid="uid://gydu5nayqxfv" path="res://models/UI/completion_screen/bottom_pic.png" id="1_i3ax0"]
+[ext_resource type="Texture2D" uid="uid://brit6dd0iqr7q" path="res://models/UI/completion_screen/congrats.png" id="2_guilh"]
+[ext_resource type="Shader" uid="uid://r1leswtw3snm" path="res://scripts/shaders/you_win.gdshader" id="3_1i11o"]
+[ext_resource type="Texture2D" uid="uid://yow5lgxobs65" path="res://models/UI/completion_screen/you_win.png" id="3_gww0i"]
+[ext_resource type="Texture2D" uid="uid://dp23y2vgoiypy" path="res://models/UI/completion_screen/underline.png" id="6_1i11o"]
+[ext_resource type="Shader" uid="uid://gxak8pf6fn0e" path="res://scripts/shaders/fade_in_image.gdshader" id="6_asax1"]
+[ext_resource type="Texture2D" uid="uid://c3qi6c63sf3c2" path="res://models/UI/completion_screen/noisy-texture-188x97-o99-d29-c-000000-t0.png" id="7_vvagg"]
+[ext_resource type="Script" uid="uid://b3nv7n2piuevp" path="res://scripts/UI/completion_screen/fade_in_img.gd" id="9_ctjrv"]
+[ext_resource type="AudioStream" uid="uid://76fhf2l3d10m" path="res://sounds/music/completion_menu.mp3" id="10_6wxdo"]
+[ext_resource type="FontFile" uid="uid://cwp7e2ec1xcxl" path="res://models/UI/font_1.ttf" id="11_3vbtl"]
+[ext_resource type="Script" uid="uid://cvouarfkebs8b" path="res://scripts/UI/completion_screen/number_loader_container.gd" id="12_khipu"]
+[ext_resource type="Script" uid="uid://b3h6v5u2yvsb8" path="res://scripts/UI/completion_screen/number_loader.gd" id="12_kv03q"]
+[ext_resource type="AudioStream" uid="uid://ym0snmuf2dr" path="res://sounds/completion_screen/dud_button.mp3" id="14_72k04"]
+[ext_resource type="AudioStream" uid="uid://cbmuxd6jhjgka" path="res://sounds/completion_screen/real_button.mp3" id="15_ow7om"]
+[ext_resource type="FontFile" uid="uid://cihdsu5hrn0r3" path="res://models/UI/munro.ttf" id="16_bsvig"]
+[ext_resource type="Script" uid="uid://paljfhm8f066" path="res://scripts/UI/death_screen_btns/menu_btn.gd" id="17_ejw3h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_asax1"]
+shader = ExtResource("3_1i11o")
+shader_parameter/move_strength = 5.0
+shader_parameter/distortion_strength = 0.01600000076
+shader_parameter/speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vvagg"]
+shader = ExtResource("6_asax1")
+shader_parameter/noise_texture = ExtResource("7_vvagg")
+shader_parameter/progress = 0.0
+shader_parameter/edge_softness = 0.0
+shader_parameter/starting_visibility = 0.0
+shader_parameter/stay_complete = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bxtr4"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 6.0
+expand_margin_right = 6.0
+anti_aliasing = false
+
+[node name="Completion_Screen" type="Control" unique_id=2001277626]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Background" type="Sprite2D" parent="." unique_id=381714133]
+texture = ExtResource("1_a1em1")
+
+[node name="Congrats" type="Sprite2D" parent="." unique_id=307378685]
+material = SubResource("ShaderMaterial_asax1")
+position = Vector2(-2, 0)
+texture = ExtResource("2_guilh")
+
+[node name="YouWin" type="Sprite2D" parent="." unique_id=1861682038]
+material = SubResource("ShaderMaterial_asax1")
+position = Vector2(2, 0)
+texture = ExtResource("3_gww0i")
+
+[node name="highlight" type="Sprite2D" parent="." unique_id=475161073]
+material = SubResource("ShaderMaterial_asax1")
+position = Vector2(0, 3)
+texture = ExtResource("6_1i11o")
+
+[node name="BottomPic" type="Sprite2D" parent="." unique_id=1277561251 node_paths=PackedStringArray("finale_chase_number")]
+material = SubResource("ShaderMaterial_vvagg")
+texture = ExtResource("1_i3ax0")
+script = ExtResource("9_ctjrv")
+finale_chase_number = NodePath("../NumberContainer/RetryNumber")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=83015830]
+position = Vector2(0, -3)
+stream = ExtResource("10_6wxdo")
+volume_db = -5.0
+autoplay = true
+
+[node name="DudSound" type="AudioStreamPlayer2D" parent="." unique_id=1607966839]
+position = Vector2(0, -3)
+stream = ExtResource("14_72k04")
+volume_db = -10.0
+
+[node name="RealSound" type="AudioStreamPlayer2D" parent="." unique_id=1098006048]
+position = Vector2(0, -3)
+stream = ExtResource("15_ow7om")
+volume_db = -5.0
+
+[node name="LabelContainer" type="Control" parent="." unique_id=746607918]
+anchors_preset = 0
+offset_left = -39.0
+offset_top = -33.0
+offset_right = 1.0
+offset_bottom = 7.0
+
+[node name="TimeElasped" type="Label" parent="LabelContainer" unique_id=1881273732]
+layout_mode = 0
+offset_left = -77.0
+offset_top = 11.0
+offset_right = 67.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.80476, 0.88, 0.3784, 1)
+theme_override_fonts/font = ExtResource("11_3vbtl")
+theme_override_font_sizes/font_size = 8
+text = "Time TO Complete -"
+
+[node name="Chases" type="Label" parent="LabelContainer" unique_id=54464869]
+layout_mode = 0
+offset_left = -75.0
+offset_top = 27.0
+offset_right = 69.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0.80476, 0.88, 0.3784, 1)
+theme_override_fonts/font = ExtResource("11_3vbtl")
+theme_override_font_sizes/font_size = 8
+text = "Chases Encountered +"
+
+[node name="Total Retries" type="Label" parent="LabelContainer" unique_id=344349305]
+layout_mode = 0
+offset_left = -76.0
+offset_top = 43.0
+offset_right = 68.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.80476, 0.88, 0.3784, 1)
+theme_override_fonts/font = ExtResource("11_3vbtl")
+theme_override_font_sizes/font_size = 8
+text = "Total Retries +"
+
+[node name="NumberContainer" type="Control" parent="." unique_id=1422661457]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("12_khipu")
+
+[node name="TimeNumer" type="Label" parent="NumberContainer" unique_id=130192735]
+layout_mode = 0
+offset_left = 31.0
+offset_top = -22.0
+offset_right = 54.0
+offset_bottom = -3.0
+theme_override_colors/font_color = Color(0.988, 1, 0.92, 1)
+theme_override_fonts/font = ExtResource("11_3vbtl")
+theme_override_font_sizes/font_size = 8
+text = "
+"
+script = ExtResource("12_kv03q")
+total_random_tries = 10
+
+[node name="ChangeInterval" type="Timer" parent="NumberContainer/TimeNumer" unique_id=2101518650]
+wait_time = 0.2
+
+[node name="ChaseNumber" type="Label" parent="NumberContainer" unique_id=597439166]
+layout_mode = 0
+offset_left = 53.0
+offset_top = -6.0
+offset_right = 76.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.988, 1, 0.92, 1)
+theme_override_fonts/font = ExtResource("11_3vbtl")
+theme_override_font_sizes/font_size = 8
+script = ExtResource("12_kv03q")
+total_random_tries = 7
+
+[node name="ChangeInterval" type="Timer" parent="NumberContainer/ChaseNumber" unique_id=1249215723]
+wait_time = 0.2
+
+[node name="RetryNumber" type="Label" parent="NumberContainer" unique_id=1581217479]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 35.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(0.988, 1, 0.92, 1)
+theme_override_fonts/font = ExtResource("11_3vbtl")
+theme_override_font_sizes/font_size = 8
+script = ExtResource("12_kv03q")
+
+[node name="ChangeInterval" type="Timer" parent="NumberContainer/RetryNumber" unique_id=2129292753]
+wait_time = 0.2
+
+[node name="MenuBtn" type="Button" parent="." unique_id=1239029583]
+layout_mode = 0
+offset_left = -18.0
+offset_top = 100.0
+offset_right = 18.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.7845891, 0.106072925, 0.030674499, 1)
+theme_override_fonts/font = ExtResource("16_bsvig")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_bxtr4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bxtr4")
+text = "Menu
+"
+script = ExtResource("17_ejw3h")
+
+[connection signal="button_down" from="MenuBtn" to="MenuBtn" method="_on_button_down"]
+[connection signal="focus_entered" from="MenuBtn" to="MenuBtn" method="_on_focus_entered"]
+[connection signal="focus_exited" from="MenuBtn" to="MenuBtn" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="MenuBtn" to="MenuBtn" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MenuBtn" to="MenuBtn" method="_on_mouse_exited"]

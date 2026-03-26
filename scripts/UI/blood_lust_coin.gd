@@ -35,7 +35,7 @@ func _handle_show(_floor_num : int):
 	update_loop = true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not update_loop:
 		return
 

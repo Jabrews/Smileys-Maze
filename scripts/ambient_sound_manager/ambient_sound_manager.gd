@@ -57,11 +57,6 @@ func pick_active_sounds(floor_parent : Node3D):
 		if children_node.name == "ToiletFlush":
 			continue
 		
-		# otherwise pick second if exists
-		if sound_streams.size() > 1:
-			var random_sound_two : AudioStreamPlayer3D = sound_streams[1]
-			random_sound_two.sound_active = true
-		
 func unpick_active_sounds(floor_parent : Node3D) :
 		for children_node in floor_parent.get_children():
 			for sound_node in children_node.get_children() :

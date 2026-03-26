@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GlLightingManager="*uid://cd28vca7h2w1j"
 GlSoundManager="*uid://bnan0d1okuen0"
 GlSignalBus="*uid://cycug5gv4aqds"
+GlStats="*uid://c0nivycqnmg0u"
 
 [debug]
 
