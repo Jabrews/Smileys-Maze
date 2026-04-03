@@ -36,9 +36,15 @@ func _process(_delta: float) -> void:
 
 
 func opening_scene() :
-	elevator_moving_sound.play()
-	floor_display_controller.increment_floor_up()
-	elevator_cam_shake.up_camera_shake(true)
+	
+	if not GlStats.retry_loop_active :
+		elevator_moving_sound.play()
+		floor_display_controller.increment_floor_up()
+		elevator_cam_shake.up_camera_shake(true)
+	if GlStats.retry_loop_active :
+		elevator_moving_sound.play()
+		floor_display_controller.increment_floor_up()
+		elevator_cam_shake.up_camera_shake(true)
 
 
 func _handle_elevator_arrived() :
@@ -64,6 +70,7 @@ func _check_for_all_papers_collected() :
 		front_elevator_buttons.buttons_available()
 		exit_scene_start_area.monitoring = true
 		GlSignalBus.emit_signal('all_papers_collected')
+		GlSignalBus.emit_signal('toggle_prevent_ambient_sound', true)
 		
 # for when detecting body of player after button_avaible()
 func _on_open_area_body_entered(body: Node3D) -> void:
@@ -94,3 +101,9 @@ func _on_exit_scene_area_body_entered(body: Node3D) -> void:
 		elevator_moving_sound.play()	
 		floor_display_controller.increment_floor_down()
 		elevator_cam_shake.down_camera_shake(true)
+
+
+func _on_open_area_body_exited(body: Node3D) -> void:
+	if body.is_in_group('player') : 
+		player_in_open_radius = false
+	

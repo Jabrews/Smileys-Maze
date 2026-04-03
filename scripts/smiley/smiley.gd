@@ -11,7 +11,7 @@ func _ready() -> void:
 	mini_map_update_timer.start()
 	
 	# update floor_num	
-	GlSignalBus.connect('smiley_change_floor', _handle_smiley_change_floor)
+	GlSignalBus.connect('smiley_changed_floor', _handle_smiley_change_floor)
 	
 	
 func _on_mini_map_update_timer_timeout() -> void:
@@ -22,7 +22,6 @@ func _process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 func _handle_smiley_change_floor(new_floor_num : int) :
-	print('update new floor : ', new_floor_num)
 	floor_num = new_floor_num
 
 

@@ -14,6 +14,7 @@ func _on_button_down() -> void:
 	GlStats.player_retries = 0	
 	GlStats.chases_encountered = 0
 	GlStats.total_time = 0
+	GlStats.retry_loop_active = false
 	
 	get_tree().change_scene_to_file("res://scenes/level_scenes/main_menu.tscn")
 

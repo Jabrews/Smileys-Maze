@@ -30,9 +30,9 @@ func _ready() -> void:
 	
 
 ## area signal
-func _on_light_area_travel(floor : int) :
-	handle_lights_on(floor)
-	flicker_lights(floor)
+func _on_light_area_travel(new_floor : int) :
+	handle_lights_on(new_floor)
+	flicker_lights(new_floor)
 
 
 ## vent signal		
@@ -51,11 +51,11 @@ func _on_vent_floor_travel(vent_floor : int, direction_down : bool) :
 	flicker_lights(floor_number)
 
 ## helper func
-func match_floor_for_node(floor : int) -> Node :
+func match_floor_for_node(new_floor : int) -> Node :
 	
 	var light_node
 	
-	match floor :
+	match new_floor :
 		1 :
 			light_node = FLOOR_ONE_LIGHT_PARENT
 		2 :

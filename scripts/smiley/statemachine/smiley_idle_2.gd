@@ -8,7 +8,7 @@ extends Node
 @onready var animation_player : AnimationPlayer = $"../../AnimationPlayer"
 
 # move nodes / dice roll
-var curr_target : Node3D
+var curr_target : Vector3 
 @onready var force_move_timer : Timer = $"../../ForceMoveTimer"
 
 # for updating smiley if stuick
@@ -25,7 +25,7 @@ func _ready() -> void:
 	GlSignalBus.connect('smiley_chase_intro_scene_start', _handle_chase_start)
 
 func state_start() :
-
+	GlSignalBus.emit_signal('toggle_prevent_ambient_sound', false)
 	animation_player.speed_scale = 0.5
 	
 func state_process(_delta) -> void :
@@ -46,21 +46,31 @@ func state_process(_delta) -> void :
 		animation_player.play('Walk')
 	
 	# get new target node pos
-	if not curr_target :
+	if curr_target == Vector3.ZERO:
 		curr_target = move_node_dice_roll()
 		smiley.velocity = Vector3.ZERO
-	
-	
-	# move to target node pos
-	if curr_target :
-		nav_agent.set_target_position(curr_target.global_position)
 
+	if curr_target != Vector3.ZERO:
+
+		var nav_map = nav_agent.get_navigation_map()
+
+		var agent_pos = NavigationServer3D.map_get_closest_point(nav_map, smiley.global_position)
+		var safe_target = NavigationServer3D.map_get_closest_point(nav_map, curr_target)
+
+		# critical: ensure both points are actually on navmesh
+		if agent_pos.distance_to(smiley.global_position) > 1.0:
+			return 
+
+		if safe_target.distance_to(curr_target) > 2.0:
+			return 
+
+		nav_agent.set_target_position(safe_target)
+	
 		# get dest
 		var dest = nav_agent.get_next_path_position()
 		var direction = dest - smiley.global_position
 		direction.y = 0
 
-		# only move / rotate if there is enough distance
 		if direction.length() > 0.05:
 			direction = direction.normalized()
 
@@ -91,15 +101,21 @@ func state_end() :
 	
 # runs after reaching move node
 func _handle_nav_finished() :
-	curr_target = null
+	curr_target = Vector3.ZERO
 	smiley.velocity = Vector3.ZERO
 	nav_agent.set_target_position(Vector3.ZERO)
 	
 # use paper, player pos to decide wherist to go
-func move_node_dice_roll() -> Node :
-	
+func move_node_dice_roll() -> Vector3:
 	var movement_node = smiley_move_manager.dice_roll_for_pos(smiley.floor_num)
-	return movement_node
+
+	if movement_node is Vector3:
+		return movement_node
+	
+	if movement_node is Node3D:
+		return movement_node.global_position
+
+	return Vector3.ZERO
 
 # can be toggled on/off
 func _handle_in_door_radius(toggleValue: bool, door_pos: Vector3, smiley_name):
@@ -160,7 +176,5 @@ func _on_force_move_timer_timeout() -> void:
 
 # for reset once chase starts
 func _handle_chase_start(_floor_num : int) :
-	print('reset curr_target')
-	curr_target = null
 	smiley.velocity = Vector3.ZERO
 	

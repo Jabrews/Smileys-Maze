@@ -39,6 +39,8 @@
 [ext_resource type="AudioStream" uid="uid://dkmrkgp8e072e" path="res://sounds/whoosh.mp3" id="37_x4rqp"]
 [ext_resource type="Script" uid="uid://dira14oj7sp0a" path="res://scripts/UI/chase_edge.gd" id="38_6bb67"]
 [ext_resource type="Texture2D" uid="uid://bn8di4j5pdlga" path="res://models/UI/chase_edge/chase_edge.png" id="38_mgb8n"]
+[ext_resource type="Shader" uid="uid://c7k3r2qcgsg3n" path="res://scripts/shaders/boss_man_cam.gdshader" id="40_y6fpy"]
+[ext_resource type="Script" uid="uid://cy6gse2g5w61m" path="res://scripts/UI/boss_man_screen_warp.gd" id="41_phcun"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p7vwb"]
 font = ExtResource("6_8dubc")
@@ -344,7 +346,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phcun"]
+shader = ExtResource("40_y6fpy")
+shader_parameter/layer_count = 0
+shader_parameter/wave_strength = 0.01
+shader_parameter/wave_speed = 2.0
+shader_parameter/tint_strength = 0.05
+shader_parameter/opacity = 0.15
+
 [node name="UI" type="Control" unique_id=653024877 node_paths=PackedStringArray("stamina_bar", "paper_count", "blood_lust_coins", "minimap_control", "minimap_floor_one", "fade_to_black_rect")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 320.0
@@ -388,7 +399,7 @@ wait_time = 0.3
 wait_time = 0.25
 
 [node name="PaperCount" type="Control" parent="." unique_id=1483551146]
-modulate = Color(0.890327, 0.7912522, 0.55528736, 1)
+modulate = Color(0.89, 0.79121, 0.5607, 1)
 anchors_preset = 0
 offset_left = 241.0
 offset_right = 320.0
@@ -676,6 +687,22 @@ visible = false
 position = Vector2(160, 120)
 texture = ExtResource("38_mgb8n")
 script = ExtResource("38_6bb67")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=991348676]
+
+[node name="BossManScreenWarp" type="ColorRect" parent="CanvasLayer" unique_id=1579674737]
+material = SubResource("ShaderMaterial_phcun")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("41_phcun")
+
+[node name="DistanceIntervalTimer" type="Timer" parent="CanvasLayer/BossManScreenWarp" unique_id=1430406098]
+wait_time = 0.5
 
 [connection signal="timeout" from="StaminaBar/RunIncrementDown" to="StaminaBar" method="_on_run_increment_down_timeout"]
 [connection signal="timeout" from="StaminaBar/RunIncrementUp" to="StaminaBar" method="_on_run_increment_up_timeout"]

@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://wp8qa3v8whyg"]
+
+[ext_resource type="Script" uid="uid://krlfuww0jyxj" path="res://scripts/UI/jump_scare_bossman.gd" id="1_aywei"]
+[ext_resource type="Shader" uid="uid://dckt2xm6r7bpo" path="res://scripts/shaders/smiley_icon.gdshader" id="1_mglsb"]
+[ext_resource type="Texture2D" uid="uid://cdiralnxrsytv" path="res://models/UI/jump_scare/bossman/bg.png" id="2_mglsb"]
+[ext_resource type="AudioStream" uid="uid://bux8x7pfqmed7" path="res://sounds/music/jump_scare_music.mp3" id="3_aywei"]
+[ext_resource type="Texture2D" uid="uid://bamxub1yr1fo6" path="res://models/UI/jump_scare/bossman/bossman_crush.png" id="3_uofxl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bbthd"]
+shader = ExtResource("1_mglsb")
+shader_parameter/distort_enabled = true
+shader_parameter/distort_strength = 7.205
+shader_parameter/distort_speed = 10.855
+shader_parameter/border_max = 4.375
+shader_parameter/border_speed = 10.0
+
+[node name="DeathMenu" type="Control" unique_id=1517081967]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_aywei")
+
+[node name="TextureRect" type="ColorRect" parent="." unique_id=80009357]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+scale = Vector2(70.234856, 36.13041)
+color = Color(0, 0, 0, 1)
+
+[node name="bg" type="Sprite2D" parent="." unique_id=284768613]
+material = SubResource("ShaderMaterial_bbthd")
+position = Vector2(155, 120)
+scale = Vector2(1.1631249, 1.0083333)
+texture = ExtResource("2_mglsb")
+
+[node name="face" type="Sprite2D" parent="." unique_id=1784175868]
+position = Vector2(157, 150)
+texture = ExtResource("3_uofxl")
+
+[node name="DurrTimer" type="Timer" parent="." unique_id=859115788]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=362708523]
+stream = ExtResource("3_aywei")
+pitch_scale = 1.69
+autoplay = true
+
+[connection signal="timeout" from="DurrTimer" to="." method="_on_durr_timer_timeout"]

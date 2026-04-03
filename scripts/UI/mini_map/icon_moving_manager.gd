@@ -30,9 +30,11 @@ func _handle_icon_changed_floor(icon_name, _icon_type, icon_pos, new_floor : int
 
 func _handle_icon_moved(icon_name, icon_type, icon_pos : Vector3) :
 	var map_parent = mini_map_math_helper.decide_parent_from_height(icon_pos.y)
+	
 	var new_icon_name = "icon-" + icon_name 
 	var icon = map_parent.get_node_or_null(new_icon_name)
 	# can become null in vent loading for player
+	
 	
 	
 	if icon :

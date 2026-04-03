@@ -115,15 +115,34 @@ func get_random_spot(floorNum: int):
 	# pick one of the nodes near that paper
 	return picked_spot.pick_random()
 
-func _handle_delete_paper_coords(paper_name) :
+func _handle_delete_paper_coords(paper_name):
+
 	var paper_index = paper_name_to_dic_index(paper_name)
-	
+
+	# remove from correct floor
 	if 1 <= paper_index and paper_index <= 3:
 		floor_one_spots_near_paper.erase(paper_index)
-	if 4 <= paper_index and paper_index <= 6 :
+		_check_floor_empty(1)
+
+	elif 4 <= paper_index and paper_index <= 6:
 		floor_two_spots_near_paper.erase(paper_index)
-	if 7 <= paper_index and paper_index <= 9 :
+		_check_floor_empty(2)
+
+	elif 7 <= paper_index and paper_index <= 9:
 		floor_three_spots_near_paper.erase(paper_index)
+		_check_floor_empty(3)
 	
-	
-	
+func _check_floor_empty(floor_num: int):
+
+	var floor_spots : Dictionary
+
+	match floor_num:
+		1:
+			floor_spots = floor_one_spots_near_paper
+		2:
+			floor_spots = floor_two_spots_near_paper
+		3:
+			floor_spots = floor_three_spots_near_paper
+
+	if floor_spots.is_empty():
+		GlSignalBus.emit_signal("floor_cleared", floor_num)

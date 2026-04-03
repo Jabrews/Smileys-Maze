@@ -20,6 +20,8 @@ var doorSpriteOpen : bool = false
 var closed_rotation : Vector3
 var open_rotation : Vector3
 
+var lock_door : bool = false
+
 func _ready() -> void:
 	closed_rotation = door_pivot.rotation
 	open_rotation = closed_rotation + Vector3(0, deg_to_rad(90), 0)
@@ -81,6 +83,7 @@ func close_door():
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN)
 	
+	
 
 func _on_door_open_delay_timeout() -> void:
 	doorDelay = false
@@ -128,3 +131,8 @@ func _on_auto_smiley_close_door_timer_timeout() -> void:
 	if doorSpriteOpen :
 		close_door()
 		doorSpriteOpen = false
+
+	
+	
+	
+	

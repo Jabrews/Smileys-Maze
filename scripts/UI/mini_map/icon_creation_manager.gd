@@ -17,6 +17,7 @@ func _handle_map_icon_obj_init(icon_type, icon_global_pos : Vector3, icon_name):
 	var icon = mini_map_icon_scene.instantiate()
 	icon.icon_type = icon_type
 	icon.name = "icon-" + icon_name
+	
 
 
 

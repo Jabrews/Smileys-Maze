@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://vjuaylmru783"]
+
+[ext_resource type="Script" uid="uid://b8mwmv8oy0ko8" path="res://scripts/UI/jump_scare_frowny_2.gd" id="1_3x5ts"]
+[ext_resource type="Texture2D" uid="uid://dvrrprci4yajj" path="res://models/UI/jump_scare/frowny/jumpscare_bg.png" id="2_8sthl"]
+[ext_resource type="Shader" uid="uid://dckt2xm6r7bpo" path="res://scripts/shaders/smiley_icon.gdshader" id="2_lbe47"]
+[ext_resource type="Texture2D" uid="uid://dw2j7fqqy2vue" path="res://models/UI/jump_scare/frowny/jumpscare-Sheet.png" id="4_3x5ts"]
+[ext_resource type="Shader" uid="uid://qi06dfhpgg7n" path="res://scripts/shaders/jump_scare_sprite.gdshader" id="4_ucqdw"]
+[ext_resource type="AudioStream" uid="uid://bux8x7pfqmed7" path="res://sounds/music/jump_scare_music.mp3" id="6_algbj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sthl"]
+shader = ExtResource("2_lbe47")
+shader_parameter/distort_enabled = true
+shader_parameter/distort_strength = 7.205
+shader_parameter/distort_speed = 10.855
+shader_parameter/border_max = 4.375
+shader_parameter/border_speed = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3x5ts"]
+shader = ExtResource("4_ucqdw")
+shader_parameter/wave_speed = 2.0
+shader_parameter/wave_strength = 0.0035
+shader_parameter/wave_freq = 18.0
+shader_parameter/pixel_size = 256.0
+shader_parameter/jitter_strength = 0.0012
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbe47"]
+atlas = ExtResource("4_3x5ts")
+region = Rect2(0, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqbhh"]
+atlas = ExtResource("4_3x5ts")
+region = Rect2(320, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucqdw"]
+atlas = ExtResource("4_3x5ts")
+region = Rect2(640, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odokn"]
+atlas = ExtResource("4_3x5ts")
+region = Rect2(960, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_algbj"]
+atlas = ExtResource("4_3x5ts")
+region = Rect2(1280, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibd5q"]
+atlas = ExtResource("4_3x5ts")
+region = Rect2(1600, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf5jo"]
+atlas = ExtResource("4_3x5ts")
+region = Rect2(1920, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vv2tj"]
+atlas = ExtResource("4_3x5ts")
+region = Rect2(2240, 0, 320, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lbe47"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbe47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqbhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucqdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odokn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_algbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibd5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf5jo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vv2tj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="DeathMenu" type="Control" unique_id=1112422827]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3x5ts")
+
+[node name="TextureRect" type="ColorRect" parent="." unique_id=1170972510]
+layout_mode = 0
+scale = Vector2(70.234856, 36.13041)
+color = Color(0, 0, 0, 1)
+
+[node name="bg" type="Sprite2D" parent="." unique_id=209576826]
+material = SubResource("ShaderMaterial_8sthl")
+position = Vector2(159.5, 121)
+scale = Vector2(1.1631249, 1.0083333)
+texture = ExtResource("2_8sthl")
+
+[node name="face" type="AnimatedSprite2D" parent="." unique_id=1694786315]
+material = SubResource("ShaderMaterial_3x5ts")
+position = Vector2(159, 117)
+sprite_frames = SubResource("SpriteFrames_lbe47")
+autoplay = "default"
+frame_progress = 0.3052855
+
+[node name="DurrTimer" type="Timer" parent="." unique_id=854225924]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1411223712]
+stream = ExtResource("6_algbj")
+pitch_scale = 1.69
+autoplay = true
+
+[connection signal="timeout" from="DurrTimer" to="." method="_on_durr_timer_timeout"]

@@ -14,7 +14,7 @@ var t_bob = 0.0
 @onready var camera := $CameraPivot/Camera3D
 @onready var spot_light := $CameraPivot/FlashLightPivot/SpotLight3D
 
-var speed := 10
+var speed : float = 10.0
 var can_run : bool = true
 
 enum MoveState { IDLE, WALK, RUN }
@@ -64,34 +64,6 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, speed)
 		
 	
-	## -------- MOVEMENT SOUND STATE MACHINE --------
-	var moving := direction.length() > 0.0
-	var new_state := MoveState.IDLE
-	
-	if moving:
-		if speed == 10 and can_run:
-			new_state = MoveState.RUN
-		else:
-			new_state = MoveState.WALK
-	
-	if new_state != current_state:
-		
-		# stop previous state
-		match current_state:
-			MoveState.WALK:
-				sound_emit_signals("stopped_walking")
-			MoveState.RUN:
-				sound_emit_signals("stopped_running")
-		
-		# start new state
-		match new_state:
-			MoveState.WALK:
-				sound_emit_signals("started_walking")
-			MoveState.RUN:
-				sound_emit_signals("started_running")
-		
-		current_state = new_state
-	## ------------------------------------------------
 	
 	
 	## dealing with flashlights ###
@@ -129,12 +101,12 @@ func handle_run():
 	if Input.is_action_just_pressed("run"):
 		if can_run:
 			GlSignalBus.emit_signal("player_started_running")
-			speed = 10
+			speed = 11.5
 	
 	# stop run
 	if Input.is_action_just_released("run"):
 		GlSignalBus.emit_signal("player_stopped_running")
-		speed = 5
+		speed = 7.5
 
 
 func _handle_stamina_bar_depleted_status(toggleValue : bool):
@@ -147,17 +119,6 @@ func _handle_stamina_bar_depleted_status(toggleValue : bool):
 
 #########################
 
-func sound_emit_signals(type):
-	if type == "started_running":
-		GlSoundManager.emit_signal("player_running")
-	if type == "started_walking":
-		GlSoundManager.emit_signal("player_walked")
-	if type == "stopped_running":
-		GlSoundManager.emit_signal("player_stopped_running")
-	if type == "stopped_walking":
-		GlSoundManager.emit_signal("player_stopped_walking")
-
-
 ## For updating mini map icon
 func _on_mini_map_update_timer_timeout() -> void:
 	# for mini map
@@ -169,5 +130,5 @@ func _handle_chase_intro_start(_floor_num : int) :
 	movement_lock = true
 	
 func _handle_chase_intro_end() :
-	movement_lock = false 
+	movement_lock = false
 	

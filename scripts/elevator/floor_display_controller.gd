@@ -7,11 +7,12 @@ extends Node
 @export var min_floor_num : int = 1
 @export var increment_up_timer : Timer 
 @export var increment_down_timer : Timer 
-# TODO
-# arrived sound
 
 var current_floor_num : int = 1
 
+func _ready() -> void: 
+	if GlStats.retry_loop_active :
+		current_floor_num = 7
 # UP
 func increment_floor_up() :
 	increment_down_timer.stop()

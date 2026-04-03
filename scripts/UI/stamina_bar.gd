@@ -17,6 +17,10 @@ func _ready() -> void:
 	progress_bar_org_pos = texture_progress_bar.position
 	GlSignalBus.connect('player_started_running', _handle_player_started_running)
 	GlSignalBus.connect('player_stopped_running', _handle_player_stopped_running)
+	
+	# stop stamina being effect when chase start
+	GlSignalBus.connect('smiley_chase_intro_scene_start', _handle_intro_start)
+	GlSignalBus.connect('smiley_chase_intro_scene_end', _handle_intro_end)
 
 func _process(delta: float) -> void:
 	
@@ -63,3 +67,9 @@ func _on_run_increment_up_timeout() -> void:
 		# change bar sprite
 		texture_progress_bar.value += 1
 ###
+
+func _handle_intro_start(_smiley_floor_num : int) :
+	run_increment_down_timer.stop()
+	
+func _handle_intro_end() :
+	run_increment_down_timer.start()

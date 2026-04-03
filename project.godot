@@ -45,6 +45,9 @@ hoverable=""
 vents=""
 smiley=""
 nav-gridmaps=""
+frowny=""
+bossman=""
+nav-doors=""
 
 [input]
 
@@ -89,7 +92,8 @@ run={
 3d_physics/layer_6="hoverable"
 3d_physics/layer_7="vents"
 3d_physics/layer_8="smiley"
-3d_physics/layer_9="9"
+3d_physics/layer_9="frowny"
+3d_physics/layer_10="bossman"
 
 [navigation]
 
@@ -99,6 +103,7 @@ run={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+3d/default_gravity=20.0
 
 [rendering]
 

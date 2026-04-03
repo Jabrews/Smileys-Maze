@@ -12,7 +12,8 @@ func _on_button_down() -> void:
 	await tween.finished
 	
 	GlStats.player_retries += 1	
-	GlStats.player_retries = 0
+	GlLightingManager.totalPapersCollected = 0
+	GlStats.retry_loop_active = true 
 	get_tree().change_scene_to_file("res://scenes/level_scenes/level.tscn")
 
 

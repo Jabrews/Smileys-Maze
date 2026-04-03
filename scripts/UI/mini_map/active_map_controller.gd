@@ -21,11 +21,11 @@ func _ready() -> void:
 
 
 ## signals for actice floor ####
-func _on_player_floor_change(floor : int) :
-	if floor == active_floor:
+func _on_player_floor_change(new_floor : int) :
+	if new_floor == active_floor:
 		return
 	
-	active_floor = floor
+	active_floor = new_floor 
 	await render_active_floors_map()
 
 

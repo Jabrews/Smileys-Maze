@@ -28,6 +28,8 @@ func _ready() -> void:
 
 
 func state_start() -> void:
+	GlSignalBus.emit_signal('toggle_prevent_ambient_sound', true)
+	
 	chase_speed = default_chase_speed
 	
 	# look at player
@@ -53,10 +55,20 @@ func state_process(_delta) :
 		if not animation_player.is_playing() :
 			animation_player.play('ChaseRun')
 		
-		# use nav agent to chase towards player
-		nav_agent.set_target_position(player.global_position)	
+		# 1. snap target to navmesh
+		var safe_target = NavigationServer3D.map_get_closest_point(
+			nav_agent.get_navigation_map(),
+			player.global_position
+		)
+
+		# 2. give that to agent
+		nav_agent.set_target_position(safe_target)
+		
+		# 3. get NEXT path point (NOT the full target)
 		var dest = nav_agent.get_next_path_position()
-		var local_dest =  dest - smiley.global_position
+
+		# 4. move toward that
+		var local_dest = dest - smiley.global_position
 		var direction = local_dest.normalized()
 		
 		## smiley direction
@@ -122,8 +134,8 @@ func detect_door() :  #note : called in process
 		
 func _handle_paper_collected() :
 	print('paper colleted')
-	default_chase_speed = default_chase_speed + 0.2
+	default_chase_speed = default_chase_speed + 0.1
 	#in case in chase
-	chase_speed = chase_speed + 0.2
+	chase_speed = chase_speed + 0.1
 		
 		

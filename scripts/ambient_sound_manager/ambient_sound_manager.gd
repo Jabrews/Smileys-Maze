@@ -7,14 +7,21 @@ extends Node
 @export var FloorTwo : Node3D
 @export var FloorThree : Node3D
 
+@export var prevent_sound_playing : bool = false
+
+
 var last_floor_node : Node3D
 
 func _ready() -> void:
+	
+	# prevent during chase, end scene	
+	GlSignalBus.connect('toggle_prevent_ambient_sound', _handle_toggle_prevent_ambient_sound)
+	
+	
 	GlSignalBus.connect('player_changed_floor', _handle_change_sound_floor)
 	
 	# set last for when changing
 	last_floor_node = FloorOne
-	
 	pick_active_sounds(FloorOne)
 	
 
@@ -63,3 +70,6 @@ func unpick_active_sounds(floor_parent : Node3D) :
 				sound_node.	sound_active = false		
 			
 			
+func _handle_toggle_prevent_ambient_sound(toggleValue : bool) :
+	prevent_sound_playing = toggleValue
+	

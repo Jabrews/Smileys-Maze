@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1or5vfej7kva"]
 
 [ext_resource type="Texture2D" uid="uid://bgfytoqydb16u" path="res://models/UI/completion_screen/bg.png" id="1_a1em1"]
+[ext_resource type="Script" uid="uid://2081aadwubb8" path="res://scripts/UI/completion_screen.gd" id="1_ejw3h"]
 [ext_resource type="Texture2D" uid="uid://gydu5nayqxfv" path="res://models/UI/completion_screen/bottom_pic.png" id="1_i3ax0"]
 [ext_resource type="Texture2D" uid="uid://brit6dd0iqr7q" path="res://models/UI/completion_screen/congrats.png" id="2_guilh"]
 [ext_resource type="Shader" uid="uid://r1leswtw3snm" path="res://scripts/shaders/you_win.gdshader" id="3_1i11o"]
@@ -60,6 +61,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+script = ExtResource("1_ejw3h")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=381714133]
 texture = ExtResource("1_a1em1")

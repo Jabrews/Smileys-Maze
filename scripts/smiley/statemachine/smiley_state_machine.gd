@@ -7,7 +7,7 @@ extends Node
 # SHARED VARS
 @export var speed : float = 7.0
 # change floor loop
-var change_floor_loop : bool = false
+var change_floor_speed_added : bool = false
 var target_player_floor_num : int = 1
 
 
@@ -23,10 +23,13 @@ var curr_state : Node
 
 func _ready():
 	# speed management to catch up with player floor
-	GlSignalBus.connect('player_changed_floor', _handle_player_change_floor)
-	GlSignalBus.connect('smiley_change_floor', _handle_smiley_change_floor)
+	GlSignalBus.connect('smiley_changed_floor', _handle_player_change_floor)
+	GlSignalBus.connect('smiley_changed_floor', _handle_smiley_change_floor)
 	# speed management with each paper
 	GlLightingManager.connect('paper_collected', _handle_paper_collected)
+	# lower speed when bossman active
+	GlSignalBus.connect('bossman_spawned', _handle_bossman_spawned)
+	GlSignalBus.connect('bossman_killed', _handle_bossman_killed)
 
 
 	states = {
@@ -63,17 +66,22 @@ func _process(delta):
 
 func _handle_player_change_floor(player_floor_num : int) :
 	# speed up if floor diff
-	if player_floor_num != get_parent().floor_num :
-		print('speed up smiley')
+	if player_floor_num != get_parent().floor_num and not change_floor_speed_added:
 		target_player_floor_num = player_floor_num
-		change_floor_loop = true
-		speed += 20
+		change_floor_speed_added = true
+		speed += 30
 
 func _handle_smiley_change_floor(smiley_floor_num : int) :
-	if smiley_floor_num == target_player_floor_num:
-		print('speed down smiley')
-		speed -= 20
-		change_floor_loop = false
+	if smiley_floor_num == target_player_floor_num and change_floor_speed_added:
+		speed -= 30
+		change_floor_speed_added = false
 
 func _handle_paper_collected() :
-	speed += 1
+	speed += 1.5
+	
+func _handle_bossman_spawned() :
+	speed += -3
+	
+func _handle_bossman_killed() :
+	speed += 3
+	

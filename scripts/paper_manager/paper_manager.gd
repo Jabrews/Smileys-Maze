@@ -8,15 +8,15 @@ extends Node
 
 ## available spots per floor (we copy these before modifying)
 var FLOOR_ONE_SPOTS : Array [Vector3] = [
-	Vector3(107.9, 4.0, -31.4),
-	Vector3(55.64, 4.0, -33.4),
-	Vector3(43, 3, 13),
-	Vector3(50, 4, 33),
-	Vector3(77, 4, 85),
-	Vector3(77, 4, 107),
-	Vector3(102, 4, 52),
-	Vector3(70, 4, 68),
-	Vector3(139, 4, 48),
+	Vector3(107.9, 4.5, -31.4),
+	Vector3(55.64, 4.5, -33.4),
+	Vector3(43, 4.5, 13),
+	Vector3(50, 4.5, 33),
+	Vector3(77, 4.5, 85),
+	Vector3(77, 4.5, 107),
+	Vector3(102, 4.5, 52),
+	Vector3(70, 4.5, 68),
+	Vector3(139, 4.5, 48),
 ]
 
 var FLOOR_TWO_SPOTS : Array[Vector3] = [
@@ -24,8 +24,8 @@ var FLOOR_TWO_SPOTS : Array[Vector3] = [
 	Vector3(76, 20, 97),
 	Vector3(53, 20, 97),
 	Vector3(69, 20, 6),
-	Vector3(70, 19, -14),
-	Vector3(32, 19, -36),
+	Vector3(70, 20, -14),
+	Vector3(32, 20, -36),
 	Vector3(25, 20, -38),
 	Vector3(103, 20, 78),
 ]

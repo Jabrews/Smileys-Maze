@@ -4,10 +4,10 @@ extends Node3D
 
 @onready var raycast : RayCast3D = $RayCast
 @onready var cone_vision_area : Area3D = $ConeVision
-@onready var player_exit_delay_timer : Timer = $PlayerExitDelayTimer
 @onready var chase_point_increment_timer : Timer = $ChasePointIncrementTimer
 @onready var proximity_point_increment_timer : Timer = $ProximityPointIncrementTimer
 @onready var chase_point_decrement_timer : Timer = $ChasePointDecrement
+@onready var coll_shape_side : CollisionShape3D = $ConeVision/CollisionShapeSide
 
 ## collision shapes for area exspansion with paper collected
 @onready var coll_shape_foward : CollisionShape3D = $ConeVision/CollisionShapeFoward
@@ -30,9 +30,13 @@ func _ready() -> void:
 	GlSignalBus.connect('smiley_chase_end', _handle_chase_end)
 	# for decreasing points more if player on diff floor than smiley
 	GlSignalBus.connect('player_changed_floor', _handle_player_changed_floor)
-	GlSignalBus.connect('smiley_change_floor', _handle_smiley_change_floor)
+	GlSignalBus.connect('smiley_changed_floor', _handle_smiley_change_floor)
 	# increase detect player area lengths with each note
 	GlLightingManager.connect('paper_collected', _handle_player_collected_paper)
+	# for decreasing and disabling areas after bossman spawnsi
+	GlSignalBus.connect('bossman_spawned', _handle_bossman_spawned)
+	GlSignalBus.connect('bossman_killed', _handle_bossman_killed)	
+	
 
 func _process(_delta: float) -> void:
 	if not player:
@@ -104,10 +108,9 @@ func _on_cone_vision_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_in_cone_vision = false
 
-		# only start exit delay if NOT in proximity
+		# if not in proximity either → fully lost
 		if not player_in_proximity:
-			if player_exit_delay_timer :
-				player_exit_delay_timer.start()
+			_handle_player_lost()
 
 
 func _on_proximity_vision_body_exited(body: Node3D) -> void:
@@ -115,21 +118,22 @@ func _on_proximity_vision_body_exited(body: Node3D) -> void:
 		player_in_proximity = false
 		proximity_point_increment_timer.stop()
 
-		# fallback to cone OR decay
+		# if still in cone → fall back to cone behavior
 		if player_in_cone_vision:
 			return
-		else:
-			chase_point_decrement_timer.start()
+
+		# otherwise fully lost
+		_handle_player_lost()
 
 
-func _on_player_exit_delay_timer_timeout() -> void:
-	# fully lost player
-	if not player_in_proximity and not player_in_cone_vision:
-		player = null
-		chase_point_increment_timer.stop()
-		proximity_point_increment_timer.stop()
+func _handle_player_lost() :
+	player = null
+
+	chase_point_increment_timer.stop()
+	proximity_point_increment_timer.stop()
+
+	if chase_point_decrement_timer.is_stopped():
 		chase_point_decrement_timer.start()
-
 
 # ========================
 # POINT SYSTEM
@@ -164,17 +168,14 @@ func _handle_chase_end() -> void:
 func _handle_player_changed_floor(floor_num : int):
 	# if smiley floor num != player floor num
 	if get_parent().floor_num != floor_num : 
-		print('double decrement true')
 		target_player_floor_num = floor_num
 		double_decrement = true
 	
 func _handle_smiley_change_floor(floor_num : int) :
 	if floor_num == target_player_floor_num :
 		double_decrement = false
-		print('double decrement false')
 	if floor_num != target_player_floor_num :
 		double_decrement = true
-		print('double decrement true')
 
 func _handle_player_collected_paper() -> void:
 	var pts_f = coll_shape_foward.shape.points
@@ -187,6 +188,9 @@ func _handle_player_collected_paper() -> void:
 
 	raycast.target_position.z += 2
 	
-	
-	
-	
+func _handle_bossman_spawned():
+	coll_shape_side.disabled = true
+	coll_shape_foward.shape.points[1].z += -2	
+func _handle_bossman_killed() :
+	coll_shape_side.disabled = false 
+	coll_shape_foward.shape.points[1].z += 2

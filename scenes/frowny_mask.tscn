@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://crnph1h5mejv4"]
+
+[ext_resource type="Texture2D" uid="uid://bskltlyk0oa80" path="res://models/frowny_model/fallen_mask/frowny_mask.png" id="1_1rtts"]
+[ext_resource type="Script" uid="uid://dms514dmh7kqy" path="res://scripts/frowny/frowny_mask.gd" id="1_twnxc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1rtts"]
+
+[node name="FrownyMask" type="RigidBody3D" unique_id=1495949847]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+collision_layer = 0
+collision_mask = 3
+mass = 10.0
+gravity_scale = 3.0
+script = ExtResource("1_twnxc")
+
+[node name="Node3D" type="Sprite3D" parent="." unique_id=1724566319]
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_1rtts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=401158518]
+shape = SubResource("SphereShape3D_1rtts")
+
+[node name="DeleteTimer" type="Timer" parent="." unique_id=2141660356]
+wait_time = 15.0
+one_shot = true
+autostart = true

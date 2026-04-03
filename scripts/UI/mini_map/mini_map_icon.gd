@@ -19,6 +19,7 @@ var paper_sprite = preload("res://models/UI/mini_map/paper.png")
 var player_sprite = preload("res://models/UI/mini_map/player_sprite.png")
 var smiley_sprite = preload("res://models/UI/mini_map/smiley.png")
 var elevator_sprite = preload("res://models/UI/mini_map/elevator-icon.png")
+var bossman_sprite = preload("res://models/UI/mini_map/bossman.png")
 
 
 # shader for smiley
@@ -55,6 +56,27 @@ func _ready() -> void:
 		material.shader = smiley_shader
 		material.set_shader_parameter("distort_enabled", true)
 		GlSignalBus.connect('player_moved', _handle_player_moved)
+	
+	if icon_type == "BOSSMAN": 
+		texture = bossman_sprite
+		reveal_radius = 50
+		z_index += 2
+		bossman_spawn_animation()
+		
+		#GlSignalBus.connect('bossman_killed', _handle_bossman_killed)
+		
+		# shader #
+		if material:
+			material = material.duplicate()
+		else:
+			material = ShaderMaterial.new()
+		material.shader = smiley_shader
+		material.set_shader_parameter("distort_enabled", true)
+		#########
+		
+		
+		
+		GlSignalBus.connect('player_moved', _handle_player_moved)
 		
 	
 	if icon_type == 'ELEVATOR' :
@@ -82,6 +104,8 @@ func _handle_player_moved(player_glob_pos : Vector2):
 		handle_player_move_smiley(player_glob_pos)
 	if icon_type == 'PAPER' :
 		handle_player_move_paper(player_glob_pos)
+	if icon_type == 'BOSSMAN':
+		handle_player_move_smiley(player_glob_pos) # simplest reuse
 
 
 	
@@ -160,4 +184,19 @@ func _handle_stop_end_time_ticking() :
 		flash_tween.kill()
 	
 	
-		
+func bossman_spawn_animation():
+	var tween = create_tween()
+	
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_OUT)
+	
+	modulate.a = 0.0
+	scale = Vector2.ONE
+	
+	tween.parallel().tween_property(self, "modulate:a", 1.0, 3.0)
+	tween.parallel().tween_property(self, "scale", Vector2(2, 2), 3.0)
+	
+	tween.tween_property(self, "scale", Vector2.ONE, 3.0)	
+	
+
+	

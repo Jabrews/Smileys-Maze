@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://0t3b7n8kcnm4"]
+
+[ext_resource type="Script" uid="uid://f6dtp65tat6f" path="res://scripts/UI/jump_scare_smiley.gd" id="1_bhsox"]
+[ext_resource type="Shader" uid="uid://dckt2xm6r7bpo" path="res://scripts/shaders/smiley_icon.gdshader" id="2_4sbqd"]
+[ext_resource type="Texture2D" uid="uid://bmoaptogcw721" path="res://models/UI/jump_scare/smiley/jumpscare_bg.png" id="3_mdg2c"]
+[ext_resource type="Shader" uid="uid://qi06dfhpgg7n" path="res://scripts/shaders/jump_scare_sprite.gdshader" id="4_q6c5g"]
+[ext_resource type="Texture2D" uid="uid://br4douq7n25xt" path="res://models/UI/jump_scare/smiley/jumpscare-Sheet.png" id="5_0n60s"]
+[ext_resource type="AudioStream" uid="uid://bux8x7pfqmed7" path="res://sounds/music/jump_scare_music.mp3" id="6_87ido"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mu7g4"]
+shader = ExtResource("2_4sbqd")
+shader_parameter/distort_enabled = true
+shader_parameter/distort_strength = 7.205
+shader_parameter/distort_speed = 10.855
+shader_parameter/border_max = 4.375
+shader_parameter/border_speed = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_13j7v"]
+shader = ExtResource("4_q6c5g")
+shader_parameter/wave_speed = 2.0
+shader_parameter/wave_strength = 0.0035
+shader_parameter/wave_freq = 18.0
+shader_parameter/pixel_size = 256.0
+shader_parameter/jitter_strength = 0.0012
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pek7"]
+atlas = ExtResource("5_0n60s")
+region = Rect2(0, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13j7v"]
+atlas = ExtResource("5_0n60s")
+region = Rect2(320, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7pxs"]
+atlas = ExtResource("5_0n60s")
+region = Rect2(640, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu7g4"]
+atlas = ExtResource("5_0n60s")
+region = Rect2(960, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7xvc"]
+atlas = ExtResource("5_0n60s")
+region = Rect2(1280, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hjcn"]
+atlas = ExtResource("5_0n60s")
+region = Rect2(1600, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jorf"]
+atlas = ExtResource("5_0n60s")
+region = Rect2(1920, 0, 320, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enomf"]
+atlas = ExtResource("5_0n60s")
+region = Rect2(2240, 0, 320, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akcac"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pek7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13j7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7pxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mu7g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7xvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hjcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jorf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enomf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="DeathMenu" type="Control" unique_id=1726268461]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bhsox")
+
+[node name="TextureRect" type="ColorRect" parent="." unique_id=2114384317]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="bg" type="Sprite2D" parent="." unique_id=1952512293]
+material = SubResource("ShaderMaterial_mu7g4")
+position = Vector2(159.5, 121)
+scale = Vector2(1.003125, 1.0083333)
+texture = ExtResource("3_mdg2c")
+
+[node name="face" type="AnimatedSprite2D" parent="." unique_id=1551502209]
+material = SubResource("ShaderMaterial_13j7v")
+position = Vector2(159, 117)
+sprite_frames = SubResource("SpriteFrames_akcac")
+autoplay = "default"
+frame_progress = 0.80437356
+
+[node name="DuriationTimer" type="Timer" parent="." unique_id=383904604]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=270989489]
+stream = ExtResource("6_87ido")
+pitch_scale = 1.69
+autoplay = true
+
+[connection signal="timeout" from="DuriationTimer" to="." method="_on_duriation_timer_timeout"]
