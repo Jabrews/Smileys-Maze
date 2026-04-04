@@ -117,3 +117,11 @@ signal stop_end_time_ticking()
 ## AUDIO
 ## =========================
 signal toggle_prevent_ambient_sound(toggleVal : bool)
+
+## =========================
+## MAIN MENU
+## =========================
+signal exit_settings_btn_dwn()
+signal btn_hovered()
+signal btn_pressed()
+signal pause_btn_down()

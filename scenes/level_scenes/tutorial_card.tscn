@@ -1,0 +1,393 @@
+[gd_scene format=3 uid="uid://cl5udoi2e6lug"]
+
+[ext_resource type="Texture2D" uid="uid://bevot13qfhldw" path="res://models/UI/tutorial_modal/tutorial_modal_bg.png" id="1_wneas"]
+[ext_resource type="Shader" uid="uid://bsmsslle3msbi" path="res://scripts/shaders/main_menu_bg.gdshader" id="2_lduye"]
+[ext_resource type="Texture2D" uid="uid://bdobujbhema3" path="res://models/UI/tutorial_modal/tutorial_paper.png" id="2_yvfco"]
+[ext_resource type="Texture2D" uid="uid://u6a8x46e3li" path="res://models/UI/tutorial_modal/vent_pic.png" id="3_xodst"]
+[ext_resource type="FontFile" uid="uid://b5bv6heqcnn4n" path="res://models/UI/3x3-pixel-font.otf" id="4_1e0h8"]
+[ext_resource type="Texture2D" uid="uid://7nk40toneuw0" path="res://models/UI/tutorial_modal/smiley_pic.png" id="4_b6uu3"]
+[ext_resource type="Texture2D" uid="uid://j0mtgbye7th0" path="res://models/UI/mini_map/paper.png" id="5_20v6o"]
+[ext_resource type="FontFile" uid="uid://pmdkcsuas84p" path="res://models/UI/my 3x5 tiny mono pixel font.ttf" id="5_j71g3"]
+[ext_resource type="Texture2D" uid="uid://vksry5rtl5uy" path="res://models/UI/tutorial_modal/elevatort_pic.png" id="5_oagw7"]
+[ext_resource type="Texture2D" uid="uid://c1qkk2mxpgnxg" path="res://models/UI/mini_map/vent_down.png" id="6_cntgq"]
+[ext_resource type="Texture2D" uid="uid://knrccbss1had" path="res://models/UI/mini_map/frowny.png" id="7_3bntm"]
+[ext_resource type="Texture2D" uid="uid://ceosbhycc3sai" path="res://models/UI/mini_map/smiley.png" id="8_cntgq"]
+[ext_resource type="Texture2D" uid="uid://bxh0ftsn2dbqk" path="res://models/UI/mini_map/bossman.png" id="9_20v6o"]
+[ext_resource type="Texture2D" uid="uid://b10ir3wd0sghw" path="res://models/UI/mini_map/elevator-icon.png" id="13_d4js8"]
+[ext_resource type="Texture2D" uid="uid://dd4ya25i0q4o2" path="res://models/UI/tutorial_modal/modal_bg_bottom_pannel.png" id="14_2hfxk"]
+[ext_resource type="Texture2D" uid="uid://c4dt7b6iuqok3" path="res://models/UI/tutorial_modal/my-pixel-art (8).png" id="15_280eh"]
+[ext_resource type="Script" uid="uid://dmrwtvep8glot" path="res://scripts/UI/tutorial_modal/bottom_pannel.gd" id="15_npiuh"]
+[ext_resource type="Texture2D" uid="uid://bldmajexx266u" path="res://models/UI/tutorial_modal/bossman_pic.png" id="16_81vko"]
+[ext_resource type="Texture2D" uid="uid://dvmt3p14h0rh" path="res://models/UI/tutorial_modal/frowny.png" id="17_755sb"]
+[ext_resource type="Texture2D" uid="uid://bb2gbgk7ctbpq" path="res://models/UI/tutorial_modal/slider/char_viewer-1.png" id="18_hdvgp"]
+[ext_resource type="Shader" uid="uid://b6gt7w815hm5j" path="res://scripts/shaders/tutorial_card.gdshader" id="19_ayeq5"]
+[ext_resource type="Script" uid="uid://cjtaovkk71tch" path="res://scripts/UI/tutorial_modal/slider.gd" id="22_ayeq5"]
+[ext_resource type="Script" uid="uid://b6y6nh8f42o11" path="res://scripts/UI/tutorial_modal/tutorial_close_btn.gd" id="23_npiuh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y8rji"]
+shader = ExtResource("2_lduye")
+shader_parameter/flicker_speed = 3.0
+shader_parameter/flicker_strength = 0.15
+shader_parameter/noise_strength = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_npiuh"]
+shader = ExtResource("19_ayeq5")
+shader_parameter/pulse_speed = 1.2
+shader_parameter/pulse_amount = 0.08
+shader_parameter/border_size = 0.03
+shader_parameter/border_strength = 0.18
+shader_parameter/hover_strength = 0.0
+shader_parameter/border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13lgm"]
+bg_color = Color(0.91014004, 0.99, 0.7722, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+
+[node name="TutorialModal" type="Control" unique_id=2004868621]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bg" type="Sprite2D" parent="." unique_id=874341918]
+position = Vector2(160, 120)
+texture = ExtResource("1_wneas")
+
+[node name="TopPannel" type="Control" parent="." unique_id=1989528059]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 294.0
+offset_bottom = 135.0
+
+[node name="Paper" type="Control" parent="TopPannel" unique_id=1950585412]
+anchors_preset = 0
+offset_left = -24.0
+offset_top = -32.0
+offset_right = -24.0
+offset_bottom = -32.0
+
+[node name="PaperTutorialPic" type="Sprite2D" parent="TopPannel/Paper" unique_id=841197961]
+material = SubResource("ShaderMaterial_y8rji")
+position = Vector2(62, 67)
+texture = ExtResource("2_yvfco")
+
+[node name="Label" type="Label" parent="TopPannel/Paper" unique_id=63077448]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 98.0
+offset_right = 108.0
+offset_bottom = 121.0
+theme_override_colors/font_color = Color(0.8808334, 1, 0.35000002, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_j71g3")
+theme_override_font_sizes/font_size = 6
+text = "Collect Papers"
+
+[node name="Label2" type="Label" parent="TopPannel/Paper" unique_id=1723733169]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 105.0
+offset_right = 95.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.948255, 0.99, 0.7623, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_1e0h8")
+theme_override_font_sizes/font_size = 4
+text = "Two papers exist on each floor.  
+Each paper brings new challenges"
+autowrap_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="TopPannel/Paper" unique_id=1579334700]
+position = Vector2(37, 46)
+texture = ExtResource("5_20v6o")
+
+[node name="Vent" type="Control" parent="TopPannel" unique_id=1322597912]
+anchors_preset = 0
+offset_left = -24.0
+offset_top = -32.0
+offset_right = -24.0
+offset_bottom = -32.0
+
+[node name="Label" type="Label" parent="TopPannel/Vent" unique_id=1370572297]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 90.0
+offset_right = 157.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(0.8808334, 1, 0.35000002, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_j71g3")
+theme_override_font_sizes/font_size = 6
+text = "Use vents"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="VentTutorialPic" type="Sprite2D" parent="TopPannel/Vent" unique_id=1670705003]
+material = SubResource("ShaderMaterial_y8rji")
+position = Vector2(127, 66.25)
+scale = Vector2(1, 1.0090909)
+texture = ExtResource("3_xodst")
+
+[node name="Label2" type="Label" parent="TopPannel/Vent" unique_id=861880553]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 105.0
+offset_right = 162.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.948255, 0.99, 0.7623, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_1e0h8")
+theme_override_font_sizes/font_size = 4
+text = "When being chased you can use vents instead of stairs for quick escape."
+autowrap_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="TopPannel/Vent" unique_id=1464559754]
+position = Vector2(104, 46)
+texture = ExtResource("6_cntgq")
+
+[node name="Smiley" type="Control" parent="TopPannel" unique_id=444867725]
+anchors_preset = 0
+offset_left = -24.0
+offset_top = -32.0
+offset_right = -24.0
+offset_bottom = -32.0
+
+[node name="Label" type="Label" parent="TopPannel/Smiley" unique_id=1066324884]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 90.0
+offset_right = 224.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(0.8808334, 1, 0.35000002, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_j71g3")
+theme_override_font_sizes/font_size = 6
+text = "Avoid Workers"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="SmileyTutorialPic" type="Sprite2D" parent="TopPannel/Smiley" unique_id=2133188735]
+material = SubResource("ShaderMaterial_y8rji")
+position = Vector2(192, 66.25)
+scale = Vector2(1, 1.0090909)
+texture = ExtResource("4_b6uu3")
+
+[node name="Label2" type="Label" parent="TopPannel/Smiley" unique_id=283292064]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 105.0
+offset_right = 221.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.948255, 0.99, 0.7623, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_1e0h8")
+theme_override_font_sizes/font_size = 4
+text = "avoid various 
+types of workers. They change with papers coll-ected"
+autowrap_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="TopPannel/Smiley" unique_id=1373728314]
+position = Vector2(170, 53)
+texture = ExtResource("7_3bntm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="TopPannel/Smiley" unique_id=228200150]
+position = Vector2(170, 46)
+texture = ExtResource("8_cntgq")
+
+[node name="Sprite2D3" type="Sprite2D" parent="TopPannel/Smiley" unique_id=1126355212]
+position = Vector2(170, 61)
+texture = ExtResource("9_20v6o")
+
+[node name="Elevator" type="Control" parent="TopPannel" unique_id=1310609891]
+anchors_preset = 0
+offset_left = -24.0
+offset_top = -32.0
+offset_right = -24.0
+offset_bottom = -32.0
+
+[node name="ElevatorTutorialPic" type="Sprite2D" parent="TopPannel/Elevator" unique_id=13497830]
+material = SubResource("ShaderMaterial_y8rji")
+position = Vector2(257, 66.125)
+scale = Vector2(1, 1.0136365)
+texture = ExtResource("5_oagw7")
+
+[node name="Label" type="Label" parent="TopPannel/Elevator" unique_id=634918204]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 90.0
+offset_right = 286.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(0.8808334, 1, 0.35000002, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_j71g3")
+theme_override_font_sizes/font_size = 6
+text = "Escape"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Label2" type="Label" parent="TopPannel/Elevator" unique_id=724865026]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 105.0
+offset_right = 291.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.948255, 0.99, 0.7623, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_1e0h8")
+theme_override_font_sizes/font_size = 4
+text = "Get to elevator 
+door before time runs out."
+autowrap_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="TopPannel/Elevator" unique_id=528444513]
+position = Vector2(235, 45)
+texture = ExtResource("13_d4js8")
+
+[node name="BottomPannel" type="Control" parent="." unique_id=1630869235]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 141.0
+offset_right = 300.0
+offset_bottom = 207.0
+script = ExtResource("15_npiuh")
+
+[node name="bg" type="Sprite2D" parent="BottomPannel" unique_id=267422280]
+position = Vector2(139, 31)
+texture = ExtResource("14_2hfxk")
+
+[node name="SmileyPic" type="Sprite2D" parent="BottomPannel" unique_id=137268971]
+material = SubResource("ShaderMaterial_y8rji")
+position = Vector2(44, 30.499994)
+scale = Vector2(0.99999994, 1.0000002)
+texture = ExtResource("15_280eh")
+
+[node name="FrownyPic" type="Sprite2D" parent="BottomPannel" unique_id=1122543989]
+visible = false
+material = SubResource("ShaderMaterial_y8rji")
+position = Vector2(44, 30.5)
+scale = Vector2(0.99999994, 1.0000002)
+texture = ExtResource("17_755sb")
+
+[node name="BossmanPic" type="Sprite2D" parent="BottomPannel" unique_id=963745328]
+visible = false
+material = SubResource("ShaderMaterial_y8rji")
+position = Vector2(44, 30.5)
+scale = Vector2(0.99999994, 1.0000002)
+texture = ExtResource("16_81vko")
+
+[node name="TopTextLabel" type="Label" parent="BottomPannel" unique_id=1357303042]
+layout_mode = 0
+offset_left = 77.0
+offset_top = -6.0
+offset_right = 137.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.8808334, 1, 0.35000002, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_j71g3")
+theme_override_font_sizes/font_size = 6
+text = "Smiley"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="BottomTextLabel" type="Label" parent="BottomPannel" unique_id=691932566]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 17.0
+offset_right = 256.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0.9505, 1, 0.73, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 4
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_j71g3")
+theme_override_font_sizes/font_size = 6
+text = "Navigates through Maze, taking special noti-ce of when player nears paper. When entity enters chase mode avoid appearing in his  vision"
+autowrap_mode = 1
+
+[node name="Slider" type="TextureRect" parent="BottomPannel" unique_id=427526512]
+modulate = Color(0.97, 0.97, 0.97, 1)
+material = SubResource("ShaderMaterial_npiuh")
+layout_mode = 0
+offset_left = 122.0
+offset_top = 58.25
+offset_right = 162.0
+offset_bottom = 67.25
+texture = ExtResource("18_hdvgp")
+script = ExtResource("22_ayeq5")
+
+[node name="CloseBtn" type="Button" parent="." unique_id=1749557362]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 11.0
+offset_right = 305.405
+offset_bottom = 33.225
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.93, 0, 0, 1)
+theme_override_constants/h_separation = 4
+theme_override_fonts/font = ExtResource("5_j71g3")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_13lgm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_13lgm")
+text = "X"
+script = ExtResource("23_npiuh")
+
+[connection signal="mouse_entered" from="BottomPannel/Slider" to="BottomPannel" method="_on_slider_mouse_entered"]
+[connection signal="mouse_exited" from="BottomPannel/Slider" to="BottomPannel" method="_on_slider_mouse_exited"]
+[connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
+[connection signal="mouse_entered" from="CloseBtn" to="CloseBtn" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CloseBtn" to="CloseBtn" method="_on_mouse_exited"]

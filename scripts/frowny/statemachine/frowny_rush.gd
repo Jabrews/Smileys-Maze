@@ -7,6 +7,7 @@ extends Node
 @onready var speed_timer : Timer = $"../../SpeedTimer"
 @onready var death_particle : GPUParticles3D = $"../../DeathParticle"
 @onready var armature : Node3D = $"../../Armature"
+@onready var player_detect_area : Area3D = $"../../PlayerDetectArea"
 
 # death mask scene
 @onready var death_mask_scene : PackedScene = preload("res://scenes/frowny_mask.tscn")
@@ -70,6 +71,8 @@ func handle_hit_wall():
 	
 	# armature	
 	armature.visible = false
+	
+	player_detect_area.monitoring = false
 	
 	# mask
 	var death_mask = death_mask_scene.instantiate()

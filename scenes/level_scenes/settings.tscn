@@ -1,0 +1,226 @@
+[gd_scene format=3 uid="uid://dopksbrtgiwy4"]
+
+[ext_resource type="Texture2D" uid="uid://gctwymgadkih" path="res://models/UI/settings/setting_bg.png" id="1_slw3c"]
+[ext_resource type="FontFile" uid="uid://cwp7e2ec1xcxl" path="res://models/UI/font_1.ttf" id="2_gmebb"]
+[ext_resource type="Script" uid="uid://cw6ibwna1yuih" path="res://scripts/UI/main_menu/volume_slider.gd" id="3_i322l"]
+[ext_resource type="Texture2D" uid="uid://bgclon5o2yuum" path="res://models/UI/main_menu/checkbox_filled.png" id="3_imhad"]
+[ext_resource type="Script" uid="uid://bjifa27su6hgx" path="res://scripts/UI/main_menu/menu_btns/fullscreen_button.gd" id="4_bs82v"]
+[ext_resource type="AudioStream" uid="uid://bgwn4v4nfgg3b" path="res://sounds/minimap/mini_map_paper_noise.mp3" id="4_kodjj"]
+[ext_resource type="Texture2D" uid="uid://bsux0q2ylrloh" path="res://models/UI/main_menu/checkbox_empty.png" id="5_jdkqc"]
+[ext_resource type="FontFile" uid="uid://cihdsu5hrn0r3" path="res://models/UI/munro.ttf" id="6_icixr"]
+[ext_resource type="Script" uid="uid://bo18gq5fi1hel" path="res://scripts/UI/main_menu/menu_btns/close_settings_btn.gd" id="7_icixr"]
+[ext_resource type="Script" uid="uid://b3hrwctlub3np" path="res://scripts/UI/main_menu/tutorial_btn_container.gd" id="8_t5jiq"]
+[ext_resource type="Texture2D" uid="uid://hwcjtljw4r5a" path="res://models/UI/main_menu/btn1.png" id="8_y26f4"]
+[ext_resource type="PackedScene" uid="uid://cl5udoi2e6lug" path="res://scenes/level_scenes/tutorial_card.tscn" id="12_vnrcc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5jiq"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 6.0
+expand_margin_right = 6.0
+
+[node name="Settings" type="Control" unique_id=78537425]
+process_mode = 3
+z_index = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg" type="Sprite2D" parent="." unique_id=848897039]
+position = Vector2(160, 115)
+texture = ExtResource("1_slw3c")
+
+[node name="Label" type="Label" parent="." unique_id=1426674942]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 19.0
+offset_right = 208.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.9529412, 0.9607843, 0.9411765, 1)
+theme_override_fonts/font = ExtResource("2_gmebb")
+theme_override_font_sizes/font_size = 12
+text = "Settings"
+
+[node name="SliderContainer" type="Control" parent="." unique_id=1785614533]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -80.0
+offset_right = 28.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SFX" type="HSlider" parent="SliderContainer" unique_id=1603098111 node_paths=PackedStringArray("sfx_audio_test")]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 208.0
+offset_bottom = 48.0
+scale = Vector2(0.7, 0.7)
+max_value = 1.5
+step = 0.001
+value = 0.75
+script = ExtResource("3_i322l")
+sfx_audio_test = NodePath("SFXAudioTest")
+
+[node name="SFXAudioTest" type="AudioStreamPlayer2D" parent="SliderContainer/SFX" unique_id=812536815]
+stream = ExtResource("4_kodjj")
+volume_db = -10.0
+
+[node name="Label" type="Label" parent="SliderContainer" unique_id=127291569]
+layout_mode = 0
+offset_top = 13.0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.72576004, 0.96, 0.3744, 1)
+theme_override_fonts/font = ExtResource("2_gmebb")
+theme_override_font_sizes/font_size = 8
+text = "SFX
+"
+
+[node name="Music" type="HSlider" parent="SliderContainer" unique_id=1918731885 node_paths=PackedStringArray("music_audio_test")]
+layout_mode = 0
+offset_top = 45.0
+offset_right = 208.0
+offset_bottom = 77.0
+scale = Vector2(0.7, 0.7)
+max_value = 1.5
+step = 0.001
+value = 0.75
+script = ExtResource("3_i322l")
+is_music_slider = true
+music_audio_test = NodePath("MUSICAudioTest")
+
+[node name="MUSICAudioTest" type="AudioStreamPlayer2D" parent="SliderContainer/Music" unique_id=393176830]
+stream = ExtResource("4_kodjj")
+volume_db = -10.0
+bus = &"Music"
+
+[node name="Label2" type="Label" parent="SliderContainer" unique_id=274290547]
+layout_mode = 0
+offset_top = 42.0
+offset_right = 48.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0.72576004, 0.96, 0.3744, 1)
+theme_override_fonts/font = ExtResource("2_gmebb")
+theme_override_font_sizes/font_size = 8
+text = "MUSIC"
+
+[node name="FullscreenContainer" type="Control" parent="." unique_id=204065184]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -2.0
+offset_right = 10.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Checkbox" type="TextureRect" parent="FullscreenContainer" unique_id=343770621]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 10.0
+offset_right = 31.0
+offset_bottom = 40.0
+texture = ExtResource("5_jdkqc")
+script = ExtResource("4_bs82v")
+unchecked_texture = ExtResource("5_jdkqc")
+checked_texture = ExtResource("3_imhad")
+
+[node name="Fullscren" type="Label" parent="FullscreenContainer" unique_id=1532818828]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0.72576004, 0.96, 0.3744, 1)
+theme_override_fonts/font = ExtResource("2_gmebb")
+theme_override_font_sizes/font_size = 6
+text = "Fullscreen"
+
+[node name="CloseBtn" type="Button" parent="." unique_id=603498786]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 168.0
+offset_right = 187.0
+offset_bottom = 199.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.2946316, 0.39372784, 0.7526185, 1)
+theme_override_fonts/font = ExtResource("6_icixr")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_t5jiq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_t5jiq")
+text = "CLOSE
+"
+script = ExtResource("7_icixr")
+
+[node name="TutorialBtnContainer" type="Control" parent="." unique_id=1470837076]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.0
+offset_top = -39.0
+offset_right = 120.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_t5jiq")
+
+[node name="TutorialBtn" type="TextureRect" parent="TutorialBtnContainer" unique_id=1185554039]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 4.0
+offset_right = 74.0
+offset_bottom = 63.0
+scale = Vector2(1, 0.76)
+texture = ExtResource("8_y26f4")
+
+[node name="TutorialLabel" type="Label" parent="TutorialBtnContainer" unique_id=2140094080]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 12.0
+offset_right = 72.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(0.89471996, 0.96, 0.79679996, 1)
+theme_override_fonts/font = ExtResource("2_gmebb")
+theme_override_font_sizes/font_size = 8
+text = "View 
+Tutorial
+Card"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="TutorialModal" parent="." unique_id=2004868621 instance=ExtResource("12_vnrcc")]
+visible = false
+layout_mode = 1
+
+[connection signal="value_changed" from="SliderContainer/SFX" to="SliderContainer/SFX" method="_on_value_changed"]
+[connection signal="value_changed" from="SliderContainer/Music" to="SliderContainer/Music" method="_on_value_changed"]
+[connection signal="mouse_entered" from="FullscreenContainer/Checkbox" to="FullscreenContainer/Checkbox" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="FullscreenContainer/Checkbox" to="FullscreenContainer/Checkbox" method="_on_mouse_exited"]
+[connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
+[connection signal="mouse_entered" from="CloseBtn" to="CloseBtn" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CloseBtn" to="CloseBtn" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="TutorialBtnContainer" to="TutorialBtnContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TutorialBtnContainer" to="TutorialBtnContainer" method="_on_mouse_exited"]

@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://m424n7pp0cxp" path="res://scenes/paper.tscn" id="19_j1vmb"]
 [ext_resource type="Script" uid="uid://dbfsd0c6oyn5c" path="res://scripts/stairway_entrance/enter_area.gd" id="20_ubvsf"]
 [ext_resource type="Script" uid="uid://c5oeuwfuytod3" path="res://scripts/stairway_entrance/exit_area.gd" id="21_i7tmr"]
+[ext_resource type="AudioStream" uid="uid://niliylgo4yjt" path="res://sounds/paused.mp3" id="21_tj0nd"]
 [ext_resource type="Script" uid="uid://cadekk7gffavy" path="res://scripts/frowny/frowny_spawn_manager.gd" id="22_h1foq"]
 [ext_resource type="Script" uid="uid://b42g8j11t37np" path="res://scripts/floor_traversal_area.gd" id="22_verpw"]
 [ext_resource type="Script" uid="uid://drd3jmibh46l" path="res://scripts/UI/mini_map/mini_map_border.gd" id="23_hxg0c"]
@@ -85,6 +86,10 @@
 [ext_resource type="AudioStream" uid="uid://f5mwhdy522wp" path="res://sounds/elevator/elevator_close.mp3" id="69_4eonm"]
 [ext_resource type="Script" uid="uid://bqd1rt2aput0n" path="res://scripts/elevator/xray_outline.gd" id="72_13hu3"]
 [ext_resource type="Shader" uid="uid://de04mf15qey3f" path="res://scripts/shaders/xray_outline.gdshader" id="72_amrhh"]
+[ext_resource type="PackedScene" uid="uid://dopksbrtgiwy4" path="res://scenes/level_scenes/settings.tscn" id="86_j8wey"]
+[ext_resource type="Script" uid="uid://ckd2bcgvgonbk" path="res://scripts/UI/button_sounds_3d.gd" id="87_cbakb"]
+[ext_resource type="AudioStream" uid="uid://bcq04u0xs1a8e" path="res://sounds/btn_hover.mp3" id="87_qrk02"]
+[ext_resource type="AudioStream" uid="uid://cdodkto44vklh" path="res://sounds/music/btn_click.mp3" id="88_cbakb"]
 
 [sub_resource type="Environment" id="Environment_arp2o"]
 background_mode = 1
@@ -656,7 +661,7 @@ script = ExtResource("1_uvd4q")
 environment = SubResource("Environment_arp2o")
 
 [node name="Player" parent="." unique_id=1811338525 instance=ExtResource("2_4m5ws")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.219141, 4.5315485, 37.729824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.286361, 4.2060637, 37.729824)
 
 [node name="Camera3D" parent="Player/CameraPivot" parent_id_path=PackedInt32Array(1811338525, 925769152) index="0" unique_id=1265583756]
 far = 78.03
@@ -684,6 +689,7 @@ script = ExtResource("4_0nntd")
 script = ExtResource("3_mb6fw")
 
 [node name="FootstepsCarpet" type="AudioStreamPlayer3D" parent="Player/SoundManager/PlayerSounds" unique_id=1737825384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.870136, 0)
 stream = ExtResource("4_6ro08")
 pitch_scale = 0.81
 
@@ -702,11 +708,13 @@ volume_db = 20.0
 
 [node name="ChaseMusic" type="AudioStreamPlayer3D" parent="Player/SoundManager/PlayerSounds" unique_id=1629887279]
 stream = ExtResource("8_67npn")
+bus = &"Music"
 
 [node name="EndSectionMusic" type="AudioStreamPlayer3D" parent="Player/SoundManager/PlayerSounds" unique_id=1462411205]
 stream = ExtResource("9_fgkak")
 volume_db = -20.0
 max_db = -3.0
+bus = &"Music"
 
 [node name="MinimapSounds" type="Node3D" parent="Player/SoundManager" unique_id=1682325442]
 script = ExtResource("9_p6y4k")
@@ -739,6 +747,23 @@ stream = ExtResource("12_4m5ws")
 volume_db = -40.0
 pitch_scale = 0.8
 autoplay = true
+
+[node name="ButtonSounds" type="Node3D" parent="Player/SoundManager" unique_id=1543730005]
+process_mode = 3
+script = ExtResource("87_cbakb")
+
+[node name="BtnHover" type="AudioStreamPlayer3D" parent="Player/SoundManager/ButtonSounds" unique_id=1713989339]
+stream = ExtResource("87_qrk02")
+volume_db = 5.0
+
+[node name="BtnClick" type="AudioStreamPlayer3D" parent="Player/SoundManager/ButtonSounds" unique_id=945593978]
+stream = ExtResource("88_cbakb")
+pitch_scale = 0.8
+
+[node name="BtnPaused" type="AudioStreamPlayer3D" parent="Player/SoundManager/ButtonSounds" unique_id=1649593359]
+stream = ExtResource("21_tj0nd")
+volume_db = -30.0
+pitch_scale = 0.9
 
 [node name="ElevatorCamShake" type="Node" parent="Player" unique_id=1682183692 node_paths=PackedStringArray("camera_pivot")]
 script = ExtResource("13_jf1hd")
@@ -959,7 +984,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.82069, 36.78511, 87.62488
 
 [node name="NavRegion" type="NavigationRegion3D" parent="Smiley" unique_id=573472545 groups=["nav-gridmaps"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18464279, -0.1767397, 0.117759705)
-visible = false
 navigation_mesh = SubResource("NavigationMesh_svjb4")
 
 [node name="Frowny" type="Node" parent="." unique_id=782109612]
@@ -3535,6 +3559,9 @@ shape = SubResource("SphereShape3D_2mfc0")
 [node name="TimeInLevel" type="Timer" parent="." unique_id=2056680659]
 autostart = true
 ignore_time_scale = true
+
+[node name="Settings" parent="." unique_id=78537425 instance=ExtResource("86_j8wey")]
+visible = false
 
 [connection signal="finished" from="Player/SoundManager/PlayerSounds/EndSectionMusic" to="Player/SoundManager/PlayerSounds" method="_on_end_section_music_finished"]
 [connection signal="timeout" from="Player/SoundManager/MinimapSounds/PaperSeen/PaperSeenDelay" to="Player/SoundManager/MinimapSounds" method="_on_paper_seen_delay_timeout"]
