@@ -19,6 +19,7 @@ func _ready() -> void:
 
 
 # called by smiley in idle
+# called by smiley in idle
 func dice_roll_for_pos(floor_num : int):
 
 	if player_curr_floor != floor_num:
@@ -34,7 +35,9 @@ func dice_roll_for_pos(floor_num : int):
 
 	# no papers left
 	if total_papers <= 0:
-		if dice_roll <= 20:
+		# 10% random
+		# 90% toward player
+		if dice_roll <= 10:
 			return rand
 		else:
 			return player_pos
@@ -42,22 +45,22 @@ func dice_roll_for_pos(floor_num : int):
 	# papers 1-2 left
 	if total_papers <= 2:
 		if player_near_paper:
-			# 5% random
-			# 20% towards player
-			# 75% towards player's paper node
-			if dice_roll <= 5:
+			# 2% random
+			# 18% toward player
+			# 80% toward player's paper node
+			if dice_roll <= 2:
 				return rand
-			elif dice_roll <= 25:
+			elif dice_roll <= 20:
 				return player_pos
 			else:
 				return player_near_paper_move_node
 		else:
-			# 20% random
-			# 50% towards paper
-			# 30% towards player
-			if dice_roll <= 20:
+			# 8% random
+			# 57% toward paper
+			# 35% toward player
+			if dice_roll <= 8:
 				return rand
-			elif dice_roll <= 70:
+			elif dice_roll <= 65:
 				if spot_near_paper:
 					return spot_near_paper
 				return rand
@@ -68,21 +71,21 @@ func dice_roll_for_pos(floor_num : int):
 	elif total_papers <= 4:
 		if player_near_paper:
 			# 1% random
-			# 19% towards player's paper node
-			# 80% towards player
+			# 14% toward player's paper node
+			# 85% toward player
 			if dice_roll <= 1:
 				return rand
-			elif dice_roll <= 20:
+			elif dice_roll <= 15:
 				return player_near_paper_move_node
 			else:
 				return player_pos
 		else:
-			# 10% random
-			# 20% towards paper
-			# 70% towards player
-			if dice_roll <= 10:
+			# 5% random
+			# 25% toward paper
+			# 70% toward player
+			if dice_roll <= 5:
 				return rand
-			elif dice_roll <= 25:
+			elif dice_roll <= 30:
 				if spot_near_paper:
 					return spot_near_paper
 				return rand
@@ -93,27 +96,26 @@ func dice_roll_for_pos(floor_num : int):
 	else:
 		if player_near_paper:
 			# 1% random
-			# 1% towards player's paper node
-			# 98% towards player
+			# 4% toward player's paper node
+			# 95% toward player
 			if dice_roll <= 1:
 				return rand
-			elif dice_roll <= 2:
+			elif dice_roll <= 5:
 				return player_near_paper_move_node
 			else:
 				return player_pos
 		else:
 			# 1% random
-			# 24% towards paper
-			# 75% towards player
+			# 29% toward paper
+			# 70% toward player
 			if dice_roll <= 1:
 				return rand
-			elif dice_roll <= 15:
+			elif dice_roll <= 30:
 				if spot_near_paper:
 					return spot_near_paper
 				return rand
 			else:
 				return player_pos
-
 
 func get_random_pos(floor_num : int):
 	var floor_nodes = get_floor_nodes(floor_num)

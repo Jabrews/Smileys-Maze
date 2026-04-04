@@ -133,9 +133,8 @@ func detect_door() :  #note : called in process
 			)
 		
 func _handle_paper_collected() :
-	print('paper colleted')
-	default_chase_speed = default_chase_speed + 0.1
+	default_chase_speed = default_chase_speed + 0.5
 	#in case in chase
-	chase_speed = chase_speed + 0.1
+	chase_speed = chase_speed + 0.5
 		
 		

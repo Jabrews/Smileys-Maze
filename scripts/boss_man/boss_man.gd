@@ -9,6 +9,7 @@ var player : CharacterBody3D
 @onready var bossman_sound_controller : Node = $SoundController
 @onready var spawning_particle_controller : Node3D = $SpawningSpriteController
 @onready var stuck_detect_timer : Timer = $StuckDetect
+@onready var player_detect_area : Area3D = $PlayerDetectArea
 
 var being_looked_at : bool = false
 var spawn_loop : bool = false
@@ -83,6 +84,7 @@ func _handle_spawn_timeout() :
 	spawn_loop = false
 	spawning_particle_controller.stop_particles()
 	bossman_sound_controller._handle_play_look_hum(false)
+	player_detect_area.monitoring = true
 	
 func _handle_mini_map_icon_update_timeout() :
 	GlSignalBus.emit_signal('icon_moved', name, 'BOSSMAN', global_position)

@@ -824,6 +824,7 @@ texture = ExtResource("16_qag38")
 
 [node name="PlayerDetectArea" type="Area3D" parent="." unique_id=1695834006]
 collision_layer = 0
+monitoring = false
 script = ExtResource("18_5qrux")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectArea" unique_id=1993742275]

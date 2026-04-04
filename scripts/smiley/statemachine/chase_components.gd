@@ -179,11 +179,11 @@ func _handle_smiley_change_floor(floor_num : int) :
 
 func _handle_player_collected_paper() -> void:
 	var pts_f = coll_shape_foward.shape.points
-	pts_f[0].z += 2
+	pts_f[0].z += 3
 	coll_shape_foward.shape.points = pts_f
 
 	var pts_b = coll_shape_backward.shape.points
-	pts_b[0].z += 2
+	pts_b[0].z += 3
 	coll_shape_backward.shape.points = pts_b
 
 	raycast.target_position.z += 2

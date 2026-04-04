@@ -1006,6 +1006,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 107.38071, 2.477, 33.218)
 [node name="Spot4" type="Node3D" parent="Frowny/FrownySpawnManager/FloorOneNodes" unique_id=1957187430]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.618, 2.477, 89.407)
 
+[node name="Spot5" type="Node3D" parent="Frowny/FrownySpawnManager/FloorOneNodes" unique_id=475461467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.069622, 2.4771097, 23.985744)
+
+[node name="Spot6" type="Node3D" parent="Frowny/FrownySpawnManager/FloorOneNodes" unique_id=1503046504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.791992, 2.4771097, -18.206238)
+
 [node name="FloorTwoNodes" type="Node3D" parent="Frowny/FrownySpawnManager" unique_id=1962361247]
 
 [node name="Spot1" type="Node3D" parent="Frowny/FrownySpawnManager/FloorTwoNodes" unique_id=919517181]
@@ -1025,6 +1031,9 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 75.5
 
 [node name="Spot6" type="Node3D" parent="Frowny/FrownySpawnManager/FloorTwoNodes" unique_id=1136132335]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.39725, 18.452, 68.12078)
+
+[node name="Spot7" type="Node3D" parent="Frowny/FrownySpawnManager/FloorTwoNodes" unique_id=1084386784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.339653, 18.93972, 83.81402)
 
 [node name="FloorThreeNodes" type="Node3D" parent="Frowny/FrownySpawnManager" unique_id=1704690788]
 
@@ -1133,7 +1142,6 @@ wait_time = 10.0
 one_shot = true
 
 [node name="UI" parent="." unique_id=653024877 instance=ExtResource("16_i24lc")]
-visible = true
 
 [node name="LightController" type="Node" parent="." unique_id=1930971233 node_paths=PackedStringArray("FLOOR_ONE_LIGHT_PARENT", "FLOOR_TWO_LIGHT_PARENT", "FLOOR_THREE_LIGHT_PARENT")]
 script = ExtResource("17_pmdj6")

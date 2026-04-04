@@ -70,18 +70,23 @@ func _handle_player_change_floor(player_floor_num : int) :
 		target_player_floor_num = player_floor_num
 		change_floor_speed_added = true
 		speed += 30
+		print('change floor speed mode : ', speed)
 
 func _handle_smiley_change_floor(smiley_floor_num : int) :
 	if smiley_floor_num == target_player_floor_num and change_floor_speed_added:
 		speed -= 30
+		print('change floor speed mode return : ', speed)
 		change_floor_speed_added = false
 
 func _handle_paper_collected() :
 	speed += 1.5
+	print('up speed with paper : ', speed)
 	
 func _handle_bossman_spawned() :
+	print('bossman_spawned ', speed)
 	speed += -3
 	
 func _handle_bossman_killed() :
 	speed += 3
+	print('bossman_killed ', speed)
 	
